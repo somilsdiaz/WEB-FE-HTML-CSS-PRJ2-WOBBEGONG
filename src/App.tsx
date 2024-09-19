@@ -1,11 +1,15 @@
 import React from 'react';
+import Header from './components/Header';
+
 
 const App: React.FC = () => {
     return (
         <div className="flex flex-col min-h-screen">
-            <header className="bg-gray-300 p-4">
-                Header
-            </header>
+            <Header
+                logoSrc="/assets/Logo_Of.svg"
+                cartLink="/cart"
+                accountLink="/account"
+            />
             <div className="bg-gray-200 p-4">
                 Sub-header
             </div>
