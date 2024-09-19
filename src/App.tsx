@@ -6,7 +6,6 @@ const App: React.FC = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Header
-                logoSrc="/assets/Logo_Of.svg"
                 cartLink="/cart"
                 accountLink="/account"
             />
