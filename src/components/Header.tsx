@@ -1,5 +1,4 @@
 import React from 'react';
-
 import logo from '../assets/img/Logo_Of.svg';
 import loupe from '../assets/img/loupe.svg';
 import cart from '../assets/img/cart.svg';
