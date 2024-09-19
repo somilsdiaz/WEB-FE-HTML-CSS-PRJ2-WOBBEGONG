@@ -15,37 +15,37 @@ export type LinkType = {
     {
       category: "Tecnología",
       links: [
-        { name: "Computadores", url: "/plp", category: "Computadores" },
-        { name: "Televisores", url: "/plp", category: "Televisores" },
-        { name: "Audio", url: "/plp", category: "Audio" },
-        { name: "Video", url: "/plp", category: "Video" },
-        { name: "Impresión", url: "/plp", category: "Impresión" },
-        { name: "Cámaras", url: "/plp", category: "Cámaras" },
+        { name: "Computadores", url: "/plp/category/computadores", category: "Computadores" },
+        { name: "Televisores", url: "/plp/category/televisores", category: "Televisores" },
+        { name: "Audio", url: "/plp/category/audio", category: "Audio" },
+        { name: "Video", url: "/plp/category/video", category: "Video" },
+        { name: "Impresión", url: "/plp/category/impresion", category: "Impresión" },
+        { name: "Cámaras", url: "/plp/category/camaras", category: "Cámaras" },
       ],
     },
     {
       category: "Electrodomésticos",
       links: [
-        { name: "Climatización", url: "/plp", category: "Climatización" },
-        { name: "Refrigeración", url: "/plp", category: "Refrigeración" },
-        { name: "Lavadoras/Secadoras", url: "/plp", category: "Lavadoras/Secadoras" },
+        { name: "Climatización", url: "/plp/category/climatizacion", category: "Climatización" },
+        { name: "Refrigeración", url: "/plp/category/refrigeracion", category: "Refrigeración" },
+        { name: "Lavadoras/Secadoras", url: "/plp/category/lavadoras-secadoras", category: "Lavadoras/Secadoras" },
       ],
     },
     {
       category: "Celulares",
       links: [
-        { name: "Celulares", url: "/plp", category: "Celulares" },
-        { name: "Tabletas", url: "/plp", category: "Tabletas" },
-        { name: "Smartwatch", url: "/plp", category: "Smartwatch" },
+        { name: "Celulares", url: "/plp/category/celulares", category: "Celulares" },
+        { name: "Tabletas", url: "/plp/category/tabletas", category: "Tabletas" },
+        { name: "Smartwatch", url: "/plp/category/smartwatch", category: "Smartwatch" },
       ],
     },
     {
       category: "Hogar",
       links: [
-        { name: "Salas", url: "/plp", category: "Salas" },
-        { name: "Comedor", url: "/plp", category: "Comedor" },
-        { name: "Cocina", url: "/plp", category: "Cocina" },
-        { name: "Baño", url: "/plp", category: "Baño" },
+        { name: "Salas", url: "/plp/category/salas", category: "Salas" },
+        { name: "Comedor", url: "/plp/category/comedor", category: "Comedor" },
+        { name: "Cocina", url: "/plp/category/cocina", category: "Cocina" },
+        { name: "Baño", url: "/plp/category/bano", category: "Baño" },
       ],
     },
   ];
