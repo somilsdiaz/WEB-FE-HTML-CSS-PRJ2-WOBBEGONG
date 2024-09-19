@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { menuItems } from '../data/DataCategory'; 
+import { menuItems } from '../data/dataCategory'; 
 
 const Subheader: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
