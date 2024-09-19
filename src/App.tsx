@@ -10,7 +10,10 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-        
+        <Header
+                cartLink="/cart"
+                accountLink="/account"
+            />
         <Subheader />
         <main className="flex-grow bg-white p-4 text-center">
           <Routes>
