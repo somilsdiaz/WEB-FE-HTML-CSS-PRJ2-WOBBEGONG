@@ -1,6 +1,7 @@
 // src/App.tsx
 
 import React from 'react';
+import Header from './components/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Subheader from './components/Subheader';
 
