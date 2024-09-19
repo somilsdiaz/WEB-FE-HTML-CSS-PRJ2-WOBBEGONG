@@ -1,6 +1,6 @@
 // App.tsx
 import React from 'react';
-import PLP from './components/plp'; // Asegúrate de que esta ruta sea correcta
+import PLP from './components/Plplista';
 
 const App: React.FC = () => {
   return (
@@ -8,7 +8,6 @@ const App: React.FC = () => {
       <header className="App-header">
       </header>
 
-      {/* Aquí renderizamos el componente PLP */}
       <PLP />
 
     </div>
