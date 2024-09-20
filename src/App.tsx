@@ -4,6 +4,7 @@ import Header from './components/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Subheader from './components/Subheader';
 import PLP from './components/Plplista';
+import PromoImage from './components/ImagenInicio';
 import Footer from './components/Footer';
 
 
@@ -20,11 +21,13 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<h2>Home Page Content</h2>} />
           </Routes>
-
-           <PLP /> 
+          <PromoImage imageId={1}/>
+          <PromoImage imageId={2}/>
+          <PLP /> 
           <ProductosDestacados />
 
         </main>
+        <PromoImage imageId={3}/>
         <Footer></Footer>      
       </div>
     </Router>
