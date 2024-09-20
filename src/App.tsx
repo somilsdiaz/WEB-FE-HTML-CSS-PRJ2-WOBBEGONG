@@ -4,6 +4,7 @@ import Header from './components/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Subheader from './components/Subheader';
 import PLP from './components/Plplista';
+import Footer from './components/Footer';
 
 
 const App: React.FC = () => {
@@ -23,7 +24,8 @@ const App: React.FC = () => {
            <PLP /> 
           <ProductosDestacados />
 
-        </main>      
+        </main>
+        <Footer></Footer>      
       </div>
     </Router>
   );
