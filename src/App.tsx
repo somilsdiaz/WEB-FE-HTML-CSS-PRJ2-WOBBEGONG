@@ -1,10 +1,8 @@
-// src/App.tsx
-
 import React from 'react';
 import Header from './components/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Subheader from './components/Subheader';
-
+import PLP from './components/Plplista';
 
 const App: React.FC = () => {
   return (
@@ -15,11 +13,11 @@ const App: React.FC = () => {
                 accountLink="/account"
             />
         <Subheader />
-        <main className="flex-grow bg-white p-4 text-center">
+        <main>
           <Routes>
             <Route path="/" element={<h2>Home Page Content</h2>} />
-            {/* <Route path="/plp/category/:categoryName" element={<PLP />} /> */}
           </Routes>
+          <PLP />
         </main>
         
       </div>
