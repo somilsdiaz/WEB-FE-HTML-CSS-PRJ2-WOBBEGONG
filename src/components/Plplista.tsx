@@ -15,8 +15,8 @@ interface Product {
 }
 
 const PLP: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
+  const [selectedCategory] = useState<string | null>(null);
+  const [selectedSubcategory] = useState<string | null>(null);
 
   const filteredProducts = products.filter(product => {
     return (
