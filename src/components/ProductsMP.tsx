@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProductosDestacados: React.FC = () => {
   return (
-    <section className="grid grid-cols-1 gap-4 my-8 font-montserrat sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <section className="grid grid-cols-1 gap-4 mx-11 my-8 font-montserrat sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {productos.map((producto: Producto) => (
         <div
           key={producto.id}
