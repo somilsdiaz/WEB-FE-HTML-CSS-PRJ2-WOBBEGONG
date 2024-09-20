@@ -23,7 +23,7 @@ const App: React.FC = () => {
           </Routes>
           <PromoImage imageId={1}/>
           <PromoImage imageId={2}/>
-          
+          <PLP /> 
           <ProductosDestacados />
 
         </main>
