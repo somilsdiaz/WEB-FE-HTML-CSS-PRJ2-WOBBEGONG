@@ -4,7 +4,7 @@ import Header from './components/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Subheader from './components/Subheader';
 import PLP from './components/Plplista';
-
+import PromoImage from './components/ImagenInicio';
 
 const App: React.FC = () => {
   return (
@@ -20,7 +20,8 @@ const App: React.FC = () => {
             <Route path="/" element={<h2>Home Page Content</h2>} />
           </Routes>
 
-           <PLP /> 
+           <PLP />
+          
           <ProductosDestacados />
 
         </main>      
