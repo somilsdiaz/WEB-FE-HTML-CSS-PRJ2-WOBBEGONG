@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductosDestacados from './components/ProductsMP';
 
 const App: React.FC = () => {
     return (
@@ -10,7 +11,7 @@ const App: React.FC = () => {
                 Sub-header
             </div>
             <main className="flex-grow bg-white p-4">
-                Content
+                <ProductosDestacados></ProductosDestacados>
             </main>
             <footer className="bg-gray-400 p-4">
                 Footer
