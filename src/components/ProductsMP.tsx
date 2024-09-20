@@ -1,4 +1,5 @@
 import productos, { Producto } from "../data/data";
+import { Link } from "react-router-dom";
 
 const ProductosDestacados: React.FC = () => {
   return (
@@ -6,8 +7,9 @@ const ProductosDestacados: React.FC = () => {
       {productos.map((producto: Producto) => (
         <div
           key={producto.id}
-          className="relative bg-custom-gradient p-4 rounded-lg text-center shadow-lg flex flex-col justify-between h-full overflow-hidden"
+          className="relative bg-custom-gradient p-4 rounded-lg text-center shadow-lg flex flex-col justify-between h-full overflow-hidden cursor-pointer"
         >
+          <Link to="/" className="absolute inset-0" /> 
           <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-transparent z-10"></div>
           <div className="relative z-20 flex justify-center items-center mb-auto h-[300px]">
             <img
@@ -27,9 +29,11 @@ const ProductosDestacados: React.FC = () => {
               ${producto.precioDescuento.toFixed(2)}{" "}
               <span className="text-pink-500 text-sm">-{producto.descuento}%</span>
             </p>
-            <button className="bg-gray-800 text-indigo-200 py-2 px-4 rounded hover:bg-gray-700 hover:text-white transition-colors mt-2 w-full">
-              Agregar al Carrito
-            </button>
+            <Link to="/" className="w-full"> 
+              <button className="bg-gray-800 text-indigo-200 py-2 px-4 rounded hover:bg-gray-700 hover:text-white transition-colors mt-2 w-full">
+                Agregar al Carrito
+              </button>
+            </Link>
           </div>
         </div>
       ))}
