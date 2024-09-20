@@ -18,6 +18,7 @@ export interface Producto {
     precioNormal: number;
     precioDescuento: number;
     descuento: number;
+    ruta: string;
   }
   
 const productos: Producto[] = [
@@ -28,6 +29,7 @@ const productos: Producto[] = [
     precioNormal: 400.00,
     precioDescuento: 320.00,
     descuento: 20,
+    ruta: "",
 },
 {
     id: 2,
@@ -36,6 +38,7 @@ const productos: Producto[] = [
     precioNormal: 600.00,
     precioDescuento: 540.00,
     descuento: 10,
+    ruta: "",
 },
 {
     id: 3,
@@ -44,6 +47,7 @@ const productos: Producto[] = [
     precioNormal: 320.00,
     precioDescuento: 256.00,
     descuento: 20,
+    ruta: "",
 },
 {
     id: 4,
@@ -52,6 +56,7 @@ const productos: Producto[] = [
     precioNormal: 550.00,
     precioDescuento: 385.00,
     descuento: 30,
+    ruta: "",
 },
 {
     id: 5,
@@ -60,6 +65,7 @@ const productos: Producto[] = [
     precioNormal: 300.00,
     precioDescuento: 285.00,
     descuento: 5,
+    ruta: "",
 },
 {
     id: 6,
@@ -68,6 +74,7 @@ const productos: Producto[] = [
     precioNormal: 3000.00,
     precioDescuento: 2400.00,
     descuento: 20,
+    ruta: "",
 },
 {
     id: 7,
@@ -76,6 +83,7 @@ const productos: Producto[] = [
     precioNormal: 700.00,
     precioDescuento: 595.00,
     descuento: 15,
+    ruta: "",
 },
 {
     id: 8,
@@ -84,6 +92,7 @@ const productos: Producto[] = [
     precioNormal: 999.00,
     precioDescuento: 899.00,
     descuento: 10,
+    ruta: "",
 },
 {
     id: 9,
@@ -92,6 +101,7 @@ const productos: Producto[] = [
     precioNormal: 1099.00,
     precioDescuento: 1044.00,
     descuento: 5,
+    ruta: "",
 },
 {
     id: 10,
@@ -100,6 +110,7 @@ const productos: Producto[] = [
     precioNormal: 999.00,
     precioDescuento: 800.00,
     descuento: 20,
+    ruta: "",
 },
 {
     id: 11,
@@ -108,6 +119,7 @@ const productos: Producto[] = [
     precioNormal: 1199.00,
     precioDescuento: 839.00,
     descuento: 30,
+    ruta: "",
 },
 {
     id: 12,
@@ -116,6 +128,7 @@ const productos: Producto[] = [
     precioNormal: 3499.00,
     precioDescuento: 3149.00,
     descuento: 10,
+    ruta: "",
 },
 ];
 
