@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'custom-gradient': 'linear-gradient(to bottom, #FFFFFF, #533DE6, #523CE0, #5536B9, #4B36BA, #3B2782)',
+      },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],
       },
