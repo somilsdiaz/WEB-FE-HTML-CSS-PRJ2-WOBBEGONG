@@ -1,17 +1,10 @@
+// Subheader.tsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { menuItems } from "../data/dataCategory";
 
 const Subheader: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-
-  const toggleCategory = (category: string) => {
-    if (activeCategory === category) {
-      setActiveCategory(null);
-    } else {
-      setActiveCategory(category);
-    }
-  };
 
   return (
     <section className="bg-[#5249cc] text-white pb-2">
@@ -23,10 +16,7 @@ const Subheader: React.FC = () => {
             onMouseEnter={() => setActiveCategory(item.category)}
             onMouseLeave={() => setActiveCategory(null)}
           >
-            <button
-              onClick={() => toggleCategory(item.category)}
-              className="block w-full text-left hover:bg-purple-600 px-5 py-2 md:px-4 md:py-2 rounded md:rounded-none"
-            >
+            <button className="block w-full text-left hover:bg-purple-600 px-5 py-2 md:px-4 md:py-2 rounded md:rounded-none">
               {item.category}
             </button>
             <ul
@@ -40,8 +30,9 @@ const Subheader: React.FC = () => {
                   className="px-5 py-2 md:px-4 md:py-2 hover:bg-[#949de0] w-full md:w-auto"
                 >
                   <Link
-                    to={link.url}
+                    to={`/PLP/${link.subcategory}`}
                     className="text-white block hover:text-blue-900"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     {link.name}
                   </Link>
