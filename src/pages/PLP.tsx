@@ -1,5 +1,4 @@
 // src/pages/PLP.tsx
-
 import MainLayout from '../layouts/MainLayout';
 import PLPLista from '../components/Plplista';
 
