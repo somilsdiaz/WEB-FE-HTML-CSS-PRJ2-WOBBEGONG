@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { filters } from '../data/dataFilter';
 
-const ProductFilter: React.FC = () => {
+interface FilterProps {
+  subcategory: string | undefined; 
+}
+
+const Filter: React.FC<FilterProps> = ({ subcategory }) => {
   const [showFilters, setShowFilters] = useState(false);
 
   const toggleFilters = () => {
@@ -14,10 +18,19 @@ const ProductFilter: React.FC = () => {
     }
   };
 
+  if (!subcategory || !filters[subcategory]) {
+    return (
+      <div className="p-4">
+        <h2>Filtros para</h2>
+        <p>No hay filtros disponibles para esta subcategoría.</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <button
-        className="bg-[#34209a] text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full"
+        className="bg-[#34209a] text-white px-4 py-2 hover:bg-blue-600 w-full"
         onClick={toggleFilters}
       >
         Filtros
@@ -30,25 +43,22 @@ const ProductFilter: React.FC = () => {
           onClick={handleClickOutside}
         >
           <div className="bg-[#2d1d6b] text-white w-[90%] sm:w-[70%] md:w-[50%] lg:w-[350px] max-w-[350px] p-5 h-full absolute left-0 transition-all duration-300 ease-in-out">
-            <h2 className="text-lg font-semibold mb-3 text-[#7c92ff]">Filtros</h2>
+            <h2 className="text-lg font-semibold mb-3 text-[#7c92ff]">Filtros para {subcategory}</h2>
 
-            {filters.map((filter, index) => (
-              <div key={index} className="mb-4">
-                <h3 className="text-base font-semibold mb-2 text-[#7c92ff]">{filter.categoria}</h3>
-                <ul className="pl-1">
-                  {filter.opciones.map((opcion, i) => (
-                    <li key={i} className="flex items-center mb-1 text-sm">
-                      <input
-                        type="checkbox"
-                        className="mr-2"
-                        id={`${filter.categoria}-${opcion.nombre}`}
-                      />
-                      <label htmlFor={`${filter.categoria}-${opcion.nombre}`}>
-                        {opcion.nombre} ({opcion.cantidad})
-                      </label>
-                    </li>
-                  ))}
-                </ul>
+            {filters[subcategory].map((filter) => (
+              <div key={filter.nombre} className="mb-4">
+                <h3 className="text-base font-semibold mb-2 text-[#7c92ff]">{filter.nombre}</h3>
+                {filter.opciones.map((opcion) => (
+                  <div key={opcion} className="flex items-center mb-1 text-sm">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      id={opcion}
+                      name={opcion}
+                    />
+                    <label htmlFor={opcion} className="ml-2">{opcion}</label>
+                  </div>
+                ))}
               </div>
             ))}
 
@@ -62,4 +72,4 @@ const ProductFilter: React.FC = () => {
   );
 };
 
-export default ProductFilter;
+export default Filter;
