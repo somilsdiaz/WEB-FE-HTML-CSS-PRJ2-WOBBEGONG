@@ -85,7 +85,7 @@ export const products = [
     {
       id: 1,
       name: "HP Portátil de negocios 17",
-      price: 1200000,
+      price: 1220000,
       discountPrice: 900000,
       rating: 4.0,
       img: img1,
