@@ -1,39 +1,23 @@
-//Solo lista de productos HU 2013
-
-import React, { useState } from "react";
-import { products } from "../data/dataPLP";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  discountPrice: number;
-  rating: number;
-  img: string;
-  category: string;
-  subcategory: string;
-}
+// PLP.tsx
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { products } from '../data/dataPLP';
 
 const PLP: React.FC = () => {
-  const [selectedCategory] = useState<string | null>(null);
-  const [selectedSubcategory] = useState<string | null>(null);
 
-  const filteredProducts = products.filter(product => {
-    return (
-      (!selectedCategory || product.category === selectedCategory) &&
-      (!selectedSubcategory || product.subcategory === selectedSubcategory)
-    );
-  });
+  const { subcategory } = useParams<{ subcategory: string }>();
+
+ 
+  const filteredProducts = products.filter((product) => product.subcategory === subcategory);
 
   return (
     <div className="bg-[#e5e5f7] p-4">
-      {/* Lista de productos */}
       <ul className="space-y-5">
-        {filteredProducts.map((product: Product) => (
+        {filteredProducts.map((product) => (
           <li key={product.id} className="bg-white rounded-xl shadow-lg flex overflow-hidden h-[295px]">
-            <div 
+            <div
               className="w-1/4 bg-[#f7f7f7] bg-center bg-no-repeat bg-contain"
-              style={{backgroundImage: `url(${product.img})`}}
+              style={{ backgroundImage: `url(${product.img})` }}
             ></div>
             <div className="flex-1 p-4">
               <h2 className="text-[#131921] text-lg font-bold mb-2">{product.name}</h2>
@@ -67,6 +51,5 @@ const PLP: React.FC = () => {
     </div>
   );
 };
-
 
 export default PLP;

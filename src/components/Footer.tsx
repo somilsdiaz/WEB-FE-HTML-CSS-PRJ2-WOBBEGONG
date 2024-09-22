@@ -15,7 +15,7 @@ import {
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[linear-gradient(0deg,_#4C37C0_0%,_#5536B9_97%,_#ffffff_100%)] text-white w-full pt-2">
+    <footer className="bg-[#4C37C0] text-white w-full pt-2">
       <div className="grid mx-auto grid-cols-1 md:grid-cols-3 items-center p-5">
         <div className="info text-center md:text-left">
           <p>NovaMart</p>
