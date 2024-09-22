@@ -16,7 +16,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ separator = ' / ' }) => {
             aria-label="breadcrumb" 
             className="bg-gradient-to-r from-[#e0eafc] to-[#cfdef3] p-2 rounded-md shadow-lg border border-gray-300 mx-auto transition-shadow duration-500 ease-in-out hover:shadow-2xl min-w-[300px]"
         >
-            <ul className="flex justify-start items-center space-x-2 ml-2 text-sm md:text-base text-gray-700 font-semibold animate-fade-in-down">
+            <ul className="flex justify-start items-center space-x-2 ml-1 text-sm md:text-base text-gray-700 font-semibold animate-fade-in-down">
                 <li>
                     <Link 
                         to="/" 
