@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Subheader from '../components/Subheader';
 import Footer from '../components/Footer';
-import Breadcrumb from '../components/Breadcrumb'; // Importa el Breadcrumb
+import Breadcrumb from '../components/Breadcrumb';
 
 
 type MainLayoutProps = {

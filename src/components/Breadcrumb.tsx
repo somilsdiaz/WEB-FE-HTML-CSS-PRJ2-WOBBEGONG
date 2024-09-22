@@ -6,46 +6,59 @@ interface BreadcrumbProps {
 }
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ separator = ' / ' }) => {
-const location = useLocation();
+    const location = useLocation();
 
-// Eliminar el basename para que no aparezca en los breadcrumbs
-const basename = '/WEB-FE-HTML-CSS-PRJ2-WOBBEGONG';
-const pathnames = location.pathname.replace(basename, '').split('/').filter((item) => item);
+    const basename = '/WEB-FE-HTML-CSS-PRJ2-WOBBEGONG';
+    const pathnames = location.pathname.replace(basename, '').split('/').filter((item) => item);
 
-return (
-<nav aria-label="breadcrumb" className="bg-[#4C37C0] p-3 rounded-md shadow-lg">
-    <ul className="flex items-center space-x-1 text-xs md:text-sm text-white font-medium">
-    <li>
-        <Link to="/" className="text-[#a8c1ff] hover:text-white hover:underline transition-all duration-300 ease-in-out">
-        Inicio
-        </Link>
-    </li>
-    {pathnames.map((name, index) => {
-        const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
-        const isLast = index === pathnames.length - 1;
+    return (
+        <nav 
+            aria-label="breadcrumb" 
+            className="bg-gradient-to-r from-[#e0eafc] to-[#cfdef3] p-2 rounded-md shadow-lg border border-gray-300 mx-auto transition-shadow duration-500 ease-in-out hover:shadow-2xl min-w-[300px]"
+        >
+            <ul className="flex justify-start items-center space-x-2 ml-2 text-sm md:text-base text-gray-700 font-semibold animate-fade-in-down">
+                <li>
+                    <Link 
+                        to="/" 
+                        className="text-[#3A1C71] hover:text-[#FFAF7B] transition-colors duration-500 ease-in-out hover:shadow-md p-2 rounded-lg"
+                    >
+                        Inicio
+                    </Link>
+                </li>
+                {pathnames.map((name, index) => {
+                    const displayName = name === 'PLP' ? 'Lista de productos' : decodeURIComponent(name.charAt(0).toUpperCase() + name.slice(1));
+                    const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
+                    const isLast = index === pathnames.length - 1;
 
-        return (
-        <li key={name} className="flex items-center">
-            <span className="mx-1 text-[#a8c1ff]">{separator}</span>
-            {isLast ? (
-            <span className="text-gray-100">
-                {/* Decodificar la URL para mostrar correctamente los caracteres especiales */}
-                {decodeURIComponent(name.charAt(0).toUpperCase() + name.slice(1))}
-            </span>
-            ) : (
-            <Link 
-                to={routeTo} 
-                className="text-[#a8c1ff] hover:text-white hover:underline transition-all duration-300 ease-in-out"
-            >
-                {decodeURIComponent(name.charAt(0).toUpperCase() + name.slice(1))}
-            </Link>
-            )}
-        </li>
-        );
-    })}
-    </ul>
-</nav>
-);
+                    return (
+                        <li key={name} className="flex items-center">
+                            <span className="mx-2 text-gray-500">
+                                {separator}
+                            </span>
+                            {isLast ? (
+                                <span className="text-[#3A1C71] font-bold">
+                                    {displayName}
+                                </span>
+                            ) : (
+                                name === 'PLP' ? (
+                                    <span className="text-[#3A1C71] hover:text-[#FFAF7B] transition-colors duration-500 ease-in-out hover:shadow-md p-0 rounded-lg">
+                                        {displayName}
+                                    </span>
+                                ) : (
+                                    <Link 
+                                        to={routeTo} 
+                                        className="text-[#3A1C71] hover:text-[#FFAF7B] transition-colors duration-500 ease-in-out hover:shadow-md p-2 rounded-lg"
+                                    >
+                                        {displayName}
+                                    </Link>
+                                )
+                            )}
+                        </li>
+                    );
+                })}
+            </ul>
+        </nav>
+    );
 };
 
 export default Breadcrumb;
