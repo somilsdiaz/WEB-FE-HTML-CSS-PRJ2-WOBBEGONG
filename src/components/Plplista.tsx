@@ -9,8 +9,33 @@ const PLP: React.FC = () => {
   const filteredProducts = products.filter((product) => product.subcategory === subcategory);
 
   return (
+  
     <div className="bg-[#e5e5f7] p-4">
-      <ul className="space-y-5">
+      
+      <section className="box-border bg-gradient-to-r from-[#e4e4f5] to-[#d4d4e5] flex flex-col space-y-2 w-full h-auto py-2 px-4 lg:px-6 shadow-lg rounded-lg transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-2xl">
+        <div className="flex justify-between items-center w-full text-[#000]">
+          <div className="text-xs md:text-sm lg:text-base font-semibold">
+            5 resultados de 80
+          </div>
+          <form className="flex items-center space-x-2">
+            <label htmlFor="ordenar" className="text-xs md:text-sm lg:text-base text-[#000]">
+              Ordenar por:
+            </label>
+            <select 
+              className="text-xs md:text-sm lg:text-base text-[#131921] bg-white border border-gray-300 rounded-md shadow-sm h-6 md:h-7 lg:h-8 px-1 transition-all duration-300 ease-in-out hover:border-blue-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" 
+              id="ordenar" 
+              aria-label="Ordenar por">
+              <option value="relevancia">Relevancia</option>
+              <option value="fecha_carga">Fecha de carga</option>
+              <option value="precio_menor_mayor">Precio menor a mayor</option>
+              <option value="precio_mayor_menor">Precio mayor a menor</option>
+            </select>
+          </form>
+        </div>
+      </section>
+
+      {/* Lista de productos */}
+      <ul className="space-y-5 mt-6">
         {filteredProducts.map((product) => (
           <li key={product.id} className="bg-white rounded-xl shadow-lg flex overflow-hidden h-[295px]">
             <div
