@@ -4,10 +4,8 @@ import { useParams } from 'react-router-dom';
 import { products } from '../data/dataPLP';
 
 const PLP: React.FC = () => {
-
   const { subcategory } = useParams<{ subcategory: string }>();
 
- 
   const filteredProducts = products.filter((product) => product.subcategory === subcategory);
 
   return (
@@ -36,11 +34,13 @@ const PLP: React.FC = () => {
                 <span className="text-xl font-bold">{Math.floor(product.price).toLocaleString()}</span>
                 <span className="text-xs">{(product.price % 1).toFixed(2).substring(1)}</span>
               </div>
-              <div className="flex items-center mb-4">
+              <div className="flex items-center mb-2">
                 <span className="text-sm mr-2">Solo por hoy:</span>
                 <span className="bg-[#83d972] text-xs px-1 py-0.5 rounded mr-2">Ahorra 25%</span>
                 <span className="font-bold">COP {product.discountPrice.toLocaleString()}</span>
               </div>
+              {/* Agregar la descripción aquí */}
+              <p className="text-sm text-gray-600 mb-4">{product.description}</p>
               <button className="bg-[#00ddff] text-[#0f1111] font-bold py-2 px-4 rounded-lg text-sm">
                 Agregar al carrito
               </button>
