@@ -32,7 +32,6 @@ const PLP: React.FC = () => {
         </div>
       </section>
 
-      {/* Lista de productos */}
       <ul className="space-y-5 mt-6">
         {filteredProducts.map((product) => (
           <li key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
