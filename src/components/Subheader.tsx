@@ -8,7 +8,7 @@ const Subheader: React.FC = () => {
 
   return (
     <section className="bg-[#5249cc] text-white pb-2">
-      <nav className="flex flex-col md:flex-row justify-start items-start md:justify-start md:items-center gap-0 md:gap-5 pl-0 md:pl-5">
+      <nav className="flex flex-col md:flex-row justify-start items-start md:justify-start md:items-center gap-0 md:gap-5 pl-0 md:pl-0">
         {menuItems.map((item) => (
           <div
             key={item.category}
