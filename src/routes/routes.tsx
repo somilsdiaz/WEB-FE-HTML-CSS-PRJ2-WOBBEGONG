@@ -9,10 +9,6 @@ const router =createBrowserRouter(
     element: <Home />,
   },
   {
-    path: '*',
-    element: <h1>404 Not Found</h1>,
-  },
-  {
     path: '/PLP/:subcategory',
     element: <PLP />,
   }
