@@ -13,7 +13,6 @@ const router =createBrowserRouter(
     element: <PLP />,
   }
 ],
-{ basename: '/WEB-FE-HTML-CSS-PRJ2-WOBBEGONG' }
 );
 
 
