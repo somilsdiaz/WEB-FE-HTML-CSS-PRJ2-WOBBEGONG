@@ -1,5 +1,5 @@
 import React from 'react';
-import PromoImage from './ImagenInicio';
+import PromoImage from './PromoImage';
 
 interface BannerProps {
   title: string;

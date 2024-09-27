@@ -1,6 +1,6 @@
 import MainLayout from "../layouts/MainLayout";
 import ProductsMP from "../components/ProductsMP";
-import PromoImage from "../components/ImagenInicio";
+import PromoImage from "../components/PromoImage";
 import Banner from "../components/Banner"
 
 const Home =()=> {
