@@ -17,7 +17,7 @@ const PromoImage: React.FC<PromoImageProps> = ({ imageId }) => {
 
   useEffect(() => {
     // Aquí se realiza la llamada al API
-    fetch(`https://web-fe-prj2-api-wobbegong.onrender.com/dataPromoImages`)
+    fetch(`https://web-fe-prj2-api-wobbegong.onrender.com/promoImages`)
       .then((response) => response.json())
       .then((data) => {
         const selectedImage = data.find((img: ImageData) => img.id === imageId);
