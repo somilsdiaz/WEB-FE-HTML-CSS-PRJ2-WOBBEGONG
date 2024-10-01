@@ -126,6 +126,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             summary: updateCartSummary(updatedProducts),
         };
     });
+
+
+    return (
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
+            {children}
+        </CartContext.Provider>
+    );
+    
 };
 
 
