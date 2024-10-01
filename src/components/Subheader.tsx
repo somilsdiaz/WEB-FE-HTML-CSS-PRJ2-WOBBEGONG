@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Skeleton from "./Skeleton";
 
 type LinkData = {
   name: string;
@@ -33,7 +34,7 @@ const Subheader: React.FC = () => {
   }, []);
 
   
-  if (loading) return <div className="justify-center bg-[#5249cc] text-white pb-2">Loading... Please wait</div>;
+  if (loading) return <Skeleton />;
   if (error) return <div>Error: {error}</div>;
 
   return (
