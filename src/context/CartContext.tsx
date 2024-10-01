@@ -98,6 +98,34 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             };
         });
     };
+
+    const updateCartSummary = (products: CartItem[]) => {
+        const subtotal = products.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const discounts = products.reduce((sum, item) => sum + (item.price - item.discountPrice) * item.quantity, 0);
+        const subtotalWithDiscount = subtotal - discounts;
+        const shipping = 300000;
+        const taxableAmount = subtotalWithDiscount + shipping;
+        const taxes = taxableAmount * 0.19;
+        const total = subtotalWithDiscount + shipping + taxes;
+    
+        return {
+            subtotal,
+            shipping,
+            discounts,
+            taxes,
+            total,
+        };
+    };
+    
+    // Integrar updateCartSummary en las funciones addToCart, removeFromCart y updateQuantity
+    setCart((prevCart) => {
+        const updatedProducts = // lógica para actualizar el carrito
+        return {
+            ...prevCart,
+            products: updatedProducts,
+            summary: updateCartSummary(updatedProducts),
+        };
+    });
 };
 
 
