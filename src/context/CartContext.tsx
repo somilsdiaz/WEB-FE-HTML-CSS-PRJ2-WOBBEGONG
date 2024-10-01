@@ -74,6 +74,30 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             };
         });
     };
+
+    const removeFromCart = (id: number) => {
+        setCart((prevCart) => {
+            const updatedProducts = prevCart.products.filter((cartItem) => cartItem.id !== id);
+            return {
+                ...prevCart,
+                products: updatedProducts,
+                summary: prevCart.summary,
+            };
+        });
+    };
+    
+    const updateQuantity = (id: number, quantity: number) => {
+        setCart((prevCart) => {
+            const updatedProducts = prevCart.products.map((cartItem) =>
+                cartItem.id === id ? { ...cartItem, quantity } : cartItem
+            );
+            return {
+                ...prevCart,
+                products: updatedProducts,
+                summary: prevCart.summary,
+            };
+        });
+    };
 };
 
 
