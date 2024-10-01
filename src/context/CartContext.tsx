@@ -52,6 +52,29 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             {children}
         </CartContext.Provider>
     );
+
+    const addToCart = (item: CartItem) => {
+        setCart((prevCart) => {
+            const existingItem = prevCart.products.find((cartItem) => cartItem.id === item.id);
+            let updatedProducts;
+            if (existingItem) {
+                updatedProducts = prevCart.products.map((cartItem) =>
+                    cartItem.id === item.id
+                        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                        : cartItem
+                );
+            } else {
+                updatedProducts = [...prevCart.products, { ...item, quantity: 1 }];
+            }
+    
+            return {
+                ...prevCart,
+                products: updatedProducts,
+                summary: prevCart.summary,
+            };
+        });
+    };
 };
+
 
 
