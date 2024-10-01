@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 interface CartItem {
     id: number;
@@ -10,11 +10,11 @@ interface CartItem {
 }
 
 interface CartSummary {
-    subtotal: number; // subtotal sin aplicar descuentos
-    shipping: number; // Precio de envio (fijo)
-    discounts: number; // total suma de los descuentos de cada producto
-    taxes: number; // iva luego de suma precio de envio y restar descuentos
-    total: number; // total a pagar con iva
+    subtotal: number;
+    shipping: number;
+    discounts: number;
+    taxes: number;
+    total: number;
 }
 
 interface Cart {
@@ -31,39 +31,45 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+const CART_STORAGE_KEY = 'cartData';
+
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [cart, setCart] = useState<Cart>({
-        summary: {
-            subtotal: 0,
-            shipping: 300000,
-            discounts: 0,
-            taxes: 0,
-            total: 0,
-        },
-        products: [],
+    //aqui leeemos el carrito desde localStorage al cargar la página
+    const [cart, setCart] = useState<Cart>(() => {
+        const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+        return storedCart
+            ? JSON.parse(storedCart)
+            : {
+                    summary: {
+                        subtotal: 0,
+                        shipping: 300000,
+                        discounts: 0,
+                        taxes: 0,
+                        total: 0,
+                    },
+                    products: [],
+                };
     });
 
-// Función para actualizar el resumen del carrito
+    //se guarda el carrito en localStorage cada vez que se actualice
+    useEffect(() => {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    }, [cart]);
+
     const updateCartSummary = (products: CartItem[]) => {
-        //subtotal (precios total sin descuentos)
         const subtotal = products.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        //descuentos (suma de descuentos de cada producto)
         const discounts = products.reduce((sum, item) => sum + (item.price - item.discountPrice) * item.quantity, 0);
-        //subtotal(precio total con descuentos)
-        const subtotalWithDiscount = subtotal - discounts; // Se resta el total de descuentos
-        //costo fijo de envio
+        const subtotalWithDiscount = subtotal - discounts;
         const shipping = 300000;
-        //calculo del iva del 19% del precio total con descuentos + costo de envio
         const taxableAmount = subtotalWithDiscount + shipping;
         const taxes = taxableAmount * 0.19;
-        //total a pagar (Total con descuentos + envio + IVA)
         const total = subtotalWithDiscount + shipping + taxes;
         return {
-            subtotal,               
-            shipping,               
-            discounts,              
-            taxes,                 
-            total,                  
+            subtotal,
+            shipping,
+            discounts,
+            taxes,
+            total,
         };
     };
 
@@ -122,11 +128,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
 };
 
-
 export const useCart = () => {
-    const contexto = useContext(CartContext);
-    if (!contexto) {
+    const context = useContext(CartContext);
+    if (!context) {
         throw new Error('useCart debe ser utilizado dentro de un CartProvider');
     }
-    return contexto;
+    return context;
 };
