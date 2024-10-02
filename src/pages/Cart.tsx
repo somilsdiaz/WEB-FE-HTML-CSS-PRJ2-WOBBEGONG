@@ -1,7 +1,7 @@
 
 import MainLayout from "../layouts/MainLayout";
 
-const PLP = () => {
+const ShoppingCart = () => {
     return (
         <MainLayout>
             <h2>Pronto</h2>
@@ -9,4 +9,4 @@ const PLP = () => {
     );
 };
 
-export default PLP;
+export default ShoppingCart;
