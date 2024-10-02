@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "./Skeleton";
+import ErrorComponent from "./ErrorComponent";
 
 type LinkData = {
   name: string;
@@ -35,7 +36,7 @@ const Subheader: React.FC = () => {
 
   
   if (loading) return <Skeleton />;
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <ErrorComponent message={error} />;
 
   return (
     <section className="bg-[#5249cc] text-white pb-2">
