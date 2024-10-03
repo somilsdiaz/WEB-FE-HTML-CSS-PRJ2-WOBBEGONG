@@ -1,15 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { products } from '../data/dataPLP';
+import { useCart } from '../context/CartContext'; 
 
 const PLP: React.FC = () => {
   const { subcategory } = useParams<{ subcategory: string }>();
+  const { addToCart } = useCart(); 
+
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [addedProducts, setAddedProducts] = useState<number[]>([]);
 
   const filteredProducts = products.filter((product) => product.subcategory === subcategory);
 
+  const handleAddToCart = (product: any) => {
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      discountPrice: product.discountPrice,
+      img: product.img,
+      quantity: 1,
+    };
+    addToCart(cartItem);
+
+    setToastMessage(`${product.name} agregado al carrito`);
+    setShowToast(true);
+
+    setAddedProducts((prev) => [...prev, product.id]);
+
+    setTimeout(() => {
+      setAddedProducts((prev) => prev.filter(id => id !== product.id));
+    }, 3000);
+  };
+
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => setShowToast(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showToast]);
+
   return (
     <div className="bg-[#e5e5f7] p-4">
-      
       <section className="box-border bg-gradient-to-r from-[#e4e4f5] to-[#d4d4e5] flex flex-col space-y-2 w-full h-auto py-2 px-4 lg:px-6 shadow-lg rounded-lg transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-2xl">
         <div className="flex flex-col sm:flex-row justify-between items-center w-full text-[#000] space-y-2 sm:space-y-0">
           <div className="text-xs md:text-sm lg:text-base font-semibold">
@@ -65,14 +98,27 @@ const PLP: React.FC = () => {
                 <p className="text-sm text-gray-600 mb-4">{product.description}</p>
               </div>
               <div className="flex justify-start mt-auto">
-                <button className="bg-[#00ddff] text-[#0f1111] font-bold py-2 px-4 rounded-lg text-sm hover:bg-[#00c8e6] transition-colors duration-300">
-                  Agregar al carrito
+                <button
+                  className="bg-[#00ddff] text-[#0f1111] font-bold py-2 px-4 rounded-lg text-sm hover:bg-[#00c8e6] transition-colors duration-300"
+                  onClick={() => handleAddToCart(product)}
+                >
+                  {addedProducts.includes(product.id) ? (
+                    <span className="text-blue-800">✔️ Agregado</span>
+                  ) : (
+                    'Agregar al carrito'
+                  )}
                 </button>
               </div>
             </div>
           </li>
         ))}
       </ul>
+
+      {showToast && (
+        <div className="fixed top-4 right-4 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg transition-all transform duration-500 ease-in-out z-50">
+          {toastMessage} 🎉
+        </div>
+      )}
     </div>
   );
 };
