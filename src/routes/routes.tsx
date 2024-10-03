@@ -2,6 +2,8 @@
 import {createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from '../pages/Home';
 import PLP from '../pages/PLP';
+import Cart from "../pages/Cart";
+
 const router =createBrowserRouter(
 [
   {
@@ -11,7 +13,11 @@ const router =createBrowserRouter(
   {
     path: '/PLP/:subcategory',
     element: <PLP />,
-  }
+  },
+    {
+    path: '/cart',  
+    element: <Cart />, 
+  },
 ],
 );
 
