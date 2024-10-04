@@ -1,11 +1,16 @@
 import React from 'react';
 
 interface PdpspecsProps {
-  specTitle: string[];
-  specValue: string[];
+  specTitle?: string[];
+  specValue?: string[];
 }
 
 const Pdpspecs: React.FC<PdpspecsProps> = ({ specTitle, specValue }) => {
+  // Si no hay especificaciones, no renderizar el componente
+  if (!specTitle?.length || !specValue?.length) {
+    return null;
+  }
+
   return (
     <section className="mt-8 bg-white rounded-xl shadow-lg overflow-hidden">
       <details className="w-full">
