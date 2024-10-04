@@ -1,20 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { products } from '../data/dataPLP';
 import { useCart } from '../context/CartContext';
-import { Link} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  discountPrice: number;
+  rating: number;
+  img: string;
+  category: string;
+  subcategory: string;
+  description: string;
+  specTitle: string[];
+  specValue: string[];
+};
 
 const PLP: React.FC = () => {
   const { subcategory } = useParams<{ subcategory: string }>();
-  const { addToCart } = useCart(); 
+  const { addToCart } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [addedProducts, setAddedProducts] = useState<number[]>([]);
 
+  useEffect(() => {
+    fetch('https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod')
+      .then(response => response.json())
+      .then(data => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+        setError(true);
+        setLoading(false);
+      });
+  }, []);
+
   const filteredProducts = products.filter((product) => product.subcategory === subcategory);
 
-  const handleAddToCart = (product: any) => {
+  const handleAddToCart = (product: Product) => {
     const cartItem = {
       id: product.id,
       name: product.name,
@@ -42,12 +71,15 @@ const PLP: React.FC = () => {
     }
   }, [showToast]);
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading products</div>;
+
   return (
     <div className="bg-[#e5e5f7] p-4">
       <section className="box-border bg-gradient-to-r from-[#e4e4f5] to-[#d4d4e5] flex flex-col space-y-2 w-full h-auto py-2 px-4 lg:px-6 shadow-lg rounded-lg transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-2xl">
         <div className="flex flex-col sm:flex-row justify-between items-center w-full text-[#000] space-y-2 sm:space-y-0">
           <div className="text-xs md:text-sm lg:text-base font-semibold">
-            {filteredProducts.length} resultados de 80
+            {filteredProducts.length} resultados de {products.length}
           </div>
           <form className="flex items-center space-x-2">
             <label htmlFor="ordenar" className="text-xs md:text-sm lg:text-base text-[#000]">
@@ -75,14 +107,21 @@ const PLP: React.FC = () => {
             ></div>
             <div className="flex-1 p-4 flex flex-col justify-between">
               <div>
-                {/* Aquí usamos Link para redirigir al PDP del producto */}
-                <Link to={`/product/${product.id}`} className="text-[#131921] text-lg font-bold mb-2 hover:text-blue-700">
+                <Link 
+                  to={`/pdp/${product.id}`} 
+                  className="text-[#131921] text-lg font-bold mb-2 hover:text-blue-600 transition-colors duration-300"
+                >
                   {product.name}
                 </Link>
                 <div className="flex items-center mb-2">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
-                      <svg key={i} className={`w-5 h-5 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                      <svg 
+                        key={i} 
+                        className={`w-5 h-5 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`} 
+                        fill="currentColor" 
+                        viewBox="0 0 20 20"
+                      >
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     ))}
@@ -96,7 +135,9 @@ const PLP: React.FC = () => {
                 </div>
                 <div className="flex items-center mb-2">
                   <span className="text-sm mr-2">Solo por hoy:</span>
-                  <span className="bg-[#83d972] text-xs px-1 py-0.5 rounded mr-2">Ahorra 25%</span>
+                  <span className="bg-[#83d972] text-xs px-1 py-0.5 rounded mr-2">
+                    Ahorra {(((product.price - product.discountPrice) / product.price) * 100).toFixed(0)}%
+                  </span>
                   <span className="font-bold">COP {product.discountPrice.toLocaleString()}</span>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">{product.description}</p>
@@ -128,3 +169,4 @@ const PLP: React.FC = () => {
 };
 
 export default PLP;
+

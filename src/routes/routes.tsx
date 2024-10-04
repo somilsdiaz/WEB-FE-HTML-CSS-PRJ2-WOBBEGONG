@@ -3,6 +3,7 @@ import {createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from '../pages/Home';
 import PLP from '../pages/PLP';
 import Cart from "../pages/Cart";
+import PDP from "../pages/PDP";
 
 const router =createBrowserRouter(
 [
@@ -17,6 +18,10 @@ const router =createBrowserRouter(
     {
     path: '/cart',  
     element: <Cart />, 
+  },
+  {
+    path: '/PDP/:id',
+    element: <PDP />,
   },
 ],
 );
