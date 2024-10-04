@@ -9,8 +9,8 @@ interface CartSummaryProps {
 const formatPrice = (price: number): string => {
   return price.toLocaleString("es-ES", {
     style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
+    currency: "COP",
+    minimumFractionDigits: 0,
   });
 };
 
@@ -39,21 +39,19 @@ const calculateTax = (subtotal: number, taxRate: number = 0.19): number => {
 const calculateTotal = (
   subtotal: number,
   shipping: number,
-  discounts: number,
-  tax: number
 ): number => {
-  return subtotal + shipping + tax - discounts;
+  return subtotal + shipping;
 };
 
 const CartSummary: React.FC<CartSummaryProps> = ({ cartItems }) => {
-  const shippingCost = 10; // Flat shipping cost
+  const shippingCost = 10000; 
   const subtotal = calculateSubtotal(cartItems);
   const discounts = calculateDiscounts(cartItems);
   const tax = calculateTax(subtotal - discounts);
-  const total = calculateTotal(subtotal, shippingCost, discounts, tax);
+  const total = calculateTotal(subtotal, shippingCost,);
 
   return (
-    <section className="bg-gray-50 p-6 shadow-lg border-2 border-purple-600 rounded-lg flex flex-col items-center text-lg">
+    <section className="bg-gray-50 p-20 shadow-lg border border-purple-600  flex flex-col items-center text-lg">
     <div className="w-full border-b border-gray-300 pb-4 mb-4">
       <h2 className="text-2xl font-bold text-center">Mi Carrito</h2>
     </div>
@@ -64,7 +62,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartItems }) => {
       <p>Iva: {formatPrice(tax)}</p>
       <h3 className="text-xl font-bold">Total: {formatPrice(total)}</h3>
     </div>
-    <button className="mt-6 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+    <button className="mt-6 bg-[#4C37C0] text-white px-4 py-2  rounded-lg hover:bg-purple-700 transition">
       Iniciar Pago
     </button>
   </section>

@@ -148,9 +148,7 @@ const ShoppingCart: React.FC = () => {
           ))}
         </section>
 
-        
-            <CartSummary cartItems={cart.products} />
-       
+        <CartSummary cartItems={cart.products} />
       </main>
     </MainLayout>
   );

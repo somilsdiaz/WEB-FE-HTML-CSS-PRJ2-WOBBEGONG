@@ -4,13 +4,10 @@ import {
   yt,
   ig,
   bancolombia,
-  davivienda,
-  aval,
   mcard,
   nequi,
   paypal,
   pse,
-  visa
 } from "../data/dataFooter";
 
 const Footer: React.FC = () => {
@@ -30,13 +27,10 @@ const Footer: React.FC = () => {
 
         <div className="pays flex flex-wrap justify-center md:justify-end text-right gap-3 max-w-xs md:max-w-full mx-auto md:mx-0">
             <a href="#"><img src={bancolombia} alt="Bancolombia" className="w-auto h-6 md:h-8 mx-2" /></a>
-            <a href="#"><img src={davivienda} alt="Davivienda" className="w-auto h-6 md:h-8 mx-2" /></a>
-            <a href="#"><img src={aval} alt="Grupo Aval" className="w-auto h-6 md:h-8 mx-2" /></a>
             <a href="#"><img src={mcard} alt="Mastercard" className="w-auto h-6 md:h-8 mx-2" /></a>
             <a href="#"><img src={nequi} alt="Nequi" className="w-auto h-6 md:h-8 mx-2" /></a>
             <a href="#"><img src={paypal} alt="PayPal" className="w-auto h-6 md:h-8 mx-2" /></a>
             <a href="#"><img src={pse} alt="PSE" className="w-auto h-6 md:h-8 mx-2" /></a>
-            <a href="#"><img src={visa} alt="Visa" className="w-auto h-6 md:h-8 mx-2" /></a>
         </div>
 
       </div>
