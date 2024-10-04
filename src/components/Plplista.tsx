@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { products } from '../data/dataPLP';
-import { useCart } from '../context/CartContext'; 
+import { useCart } from '../context/CartContext';
+import { Link} from 'react-router-dom'
 
 const PLP: React.FC = () => {
   const { subcategory } = useParams<{ subcategory: string }>();
@@ -46,7 +47,7 @@ const PLP: React.FC = () => {
       <section className="box-border bg-gradient-to-r from-[#e4e4f5] to-[#d4d4e5] flex flex-col space-y-2 w-full h-auto py-2 px-4 lg:px-6 shadow-lg rounded-lg transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-2xl">
         <div className="flex flex-col sm:flex-row justify-between items-center w-full text-[#000] space-y-2 sm:space-y-0">
           <div className="text-xs md:text-sm lg:text-base font-semibold">
-            5 resultados de 80
+            {filteredProducts.length} resultados de 80
           </div>
           <form className="flex items-center space-x-2">
             <label htmlFor="ordenar" className="text-xs md:text-sm lg:text-base text-[#000]">
@@ -74,7 +75,10 @@ const PLP: React.FC = () => {
             ></div>
             <div className="flex-1 p-4 flex flex-col justify-between">
               <div>
-                <h2 className="text-[#131921] text-lg font-bold mb-2">{product.name}</h2>
+                {/* Aquí usamos Link para redirigir al PDP del producto */}
+                <Link to={`/product/${product.id}`} className="text-[#131921] text-lg font-bold mb-2 hover:text-blue-700">
+                  {product.name}
+                </Link>
                 <div className="flex items-center mb-2">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
