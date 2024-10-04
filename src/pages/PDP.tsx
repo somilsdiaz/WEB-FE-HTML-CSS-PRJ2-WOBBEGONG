@@ -5,6 +5,7 @@ import Pdpdetalle from "../components/Pdpdetalle";
 import Pdpspecs from "../components/Pdpspecs";
 import Skeleton from "../components/Skeleton";
 import ErrorComponent from "../components/ErrorComponent";
+import TPIsection from "../components/TPIsection";  // Importar el nuevo componente
 
 type ProductData = {
   id: number;
@@ -70,6 +71,7 @@ const PDP = () => {
           specTitle={productData.specTitle} 
           specValue={productData.specValue} 
         />
+        {productData && <TPIsection currentProductId={productData.id} />}
       </main>
     </MainLayout>
   );
