@@ -1,12 +1,25 @@
-import productos, { Producto } from "../data/data";
 import { useCart } from '../context/CartContext'; 
 import { useState, useEffect } from 'react';
+
+interface Producto {
+  id: number;
+  nombre: string;
+  imagen: string;
+  precioNormal: number;
+  precioDescuento: number;
+  descuento: number;
+  ruta: string;
+}
 
 const ProductosDestacados: React.FC = () => {
   const { addToCart } = useCart();
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [addedProducts, setAddedProducts] = useState<number[]>([]);
+  const [productos, setProductos] = useState<Producto[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
 
   const handleAddToCart = (producto: Producto) => {
     const cartItem = {
@@ -38,6 +51,35 @@ const ProductosDestacados: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [showToast]);
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch(
+          "https://web-fe-prj2-api-wobbegong.onrender.com/datafhp"
+        );
+        if (!response.ok) {
+          throw new Error("Error al cargar los productos");
+        }
+        const data = await response.json();
+        setProductos(data);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProductos();
+  }, []);
+
+  if (isLoading) {
+    return <p>Cargando productos...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <section className="grid grid-cols-1 gap-4 mx-11 my-8 font-montserrat sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
