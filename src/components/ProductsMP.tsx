@@ -1,5 +1,5 @@
-import { useCart } from '../context/CartContext'; 
-import { useState, useEffect } from 'react';
+import { useCart } from "../context/CartContext";
+import { useState, useEffect } from "react";
 
 interface Producto {
   id: number;
@@ -14,24 +14,23 @@ interface Producto {
 const ProductosDestacados: React.FC = () => {
   const { addToCart } = useCart();
   const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
+  const [toastMessage, setToastMessage] = useState("");
   const [addedProducts, setAddedProducts] = useState<number[]>([]);
   const [productos, setProductos] = useState<Producto[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-
   const handleAddToCart = (producto: Producto) => {
     const cartItem = {
       id: producto.id,
-      name: producto.nombre,              
-      price: producto.precioNormal,        
-      discountPrice: producto.precioDescuento, 
-      img: producto.imagen,                 
-      quantity: 1,                         
+      name: producto.nombre,
+      price: producto.precioNormal,
+      discountPrice: producto.precioDescuento,
+      img: producto.imagen,
+      quantity: 1,
     };
-    addToCart(cartItem); 
-    
+    addToCart(cartItem);
+
     //configuracion del mensaje de agregado
     setToastMessage(`${producto.nombre} agregado al carrito`);
     setShowToast(true);
@@ -41,13 +40,13 @@ const ProductosDestacados: React.FC = () => {
 
     //reseteo del boton a su estado original  (configuracio en segundos)
     setTimeout(() => {
-      setAddedProducts((prev) => prev.filter(id => id !== producto.id));
+      setAddedProducts((prev) => prev.filter((id) => id !== producto.id));
     }, 3000);
   };
 
   useEffect(() => {
     if (showToast) {
-      const timer = setTimeout(() => setShowToast(false), 3000); 
+      const timer = setTimeout(() => setShowToast(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [showToast]);
@@ -101,11 +100,14 @@ const ProductosDestacados: React.FC = () => {
               {producto.nombre}
             </h2>
             <p className="text-sm line-through text-purple-300">
-              ${producto.precioNormal.toFixed(2)}
+              ${Number(producto.precioNormal).toFixed(2)}
             </p>
+
             <p className="text-white font-bold mb-2">
-              ${producto.precioDescuento.toFixed(2)}{" "}
-              <span className="text-pink-500 text-sm">-{producto.descuento}%</span>
+              ${Number(producto.precioDescuento).toFixed(2)}{" "}
+              <span className="text-pink-500 text-sm">
+                -{producto.descuento}%
+              </span>
             </p>
 
             {/* Cambiar el texto del botón según el estado del producto */}
@@ -116,7 +118,7 @@ const ProductosDestacados: React.FC = () => {
               {addedProducts.includes(producto.id) ? (
                 <span className="text-green-500">✔️ Agregado</span>
               ) : (
-                'Agregar al Carrito'
+                "Agregar al Carrito"
               )}
             </button>
           </div>
