@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Pdpdetalle from "../components/Pdpdetalle";
 import Pdpspecs from "../components/Pdpspecs";
@@ -8,20 +8,26 @@ import ErrorComponent from "../components/ErrorComponent";
 
 type ProductData = {
   id: number;
-  name: string;
-  price: number;
-  discountPrice: number;
-  rating: number;
-  img: string;
-  category: string;
-  subcategory: string;
-  description: string;
-  specTitle: string[];
-  specValue: string[];
+  name?: string;
+  nombre?: string;
+  price?: number;
+  precioNormal?: number;
+  discountPrice?: number;
+  precioDescuento?: number;
+  rating?: number;
+  img?: string;
+  imagen?: string;
+  category?: string;
+  subcategory?: string;
+  description?: string;
+  descripcion?: string;
+  specTitle?: string[];
+  specValue?: string[];
 };
 
 const PDP = () => {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const [productData, setProductData] = useState<ProductData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
@@ -29,8 +35,17 @@ const PDP = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod/${id}`);
-        if (!response.ok) throw new Error('Network response was not ok');
+        const isPlpProduct = location.pathname.includes('/pdp/pdp/');
+        const apiUrl = isPlpProduct
+          ? `https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod/${id}`
+          : `https://web-fe-prj2-api-wobbegong.onrender.com/datafhp/${id}`;
+        
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+          throw new Error('Product not found');
+        }
+        
         const data = await response.json();
         setProductData(data);
       } catch (error) {
@@ -42,7 +57,7 @@ const PDP = () => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id, location]);
 
   if (loading) return <MainLayout><Skeleton /></MainLayout>;
   if (error || !productData) return <MainLayout><ErrorComponent /></MainLayout>;
