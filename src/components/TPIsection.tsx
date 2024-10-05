@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; 
-import Skeleton from "./Skeleton";
-import ErrorComponent from "./ErrorComponent";
+import { Link } from "react-router-dom";
 
-type Product = {
+type ProductDataPDP = {
   id: number;
   name: string;
   price: number;
@@ -13,28 +11,64 @@ type Product = {
   subcategory: string;
 };
 
+type ProductDataFHP = {
+  id: number;
+  nombre: string;
+  precioNormal: number;
+  precioDescuento: number;
+  imagen: string;
+  subcategory: string;
+};
+
 type TPIsectionProps = {
   currentProductId: number;
 };
 
 const TPIsection = ({ currentProductId }: TPIsectionProps) => {
-  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [relatedProducts, setRelatedProducts] = useState<ProductDataPDP[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const [currentSubcategory, setCurrentSubcategory] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCurrentProduct = async () => {
+      try {
+        // Intentar obtener el producto actual de datafhp
+        const responseFHP = await fetch(`https://web-fe-prj2-api-wobbegong.onrender.com/datafhp/${currentProductId}`);
+        
+        if (responseFHP.ok) {
+          const currentProduct: ProductDataFHP = await responseFHP.json();
+          setCurrentSubcategory(currentProduct.subcategory);
+        } else {
+          // Si no se encuentra, intentar con dataPDPprod
+          const responsePDP = await fetch(`https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod/${currentProductId}`);
+          if (responsePDP.ok) {
+            const currentProduct: ProductDataPDP = await responsePDP.json();
+            setCurrentSubcategory(currentProduct.subcategory);
+          } else {
+            throw new Error('Error al obtener el producto actual');
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching current product:", error);
+        setError(true);
+      }
+    };
+
+    fetchCurrentProduct();
+  }, [currentProductId]);
 
   useEffect(() => {
     const fetchRelatedProducts = async () => {
-      try {
-        const response = await fetch(`https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod/${currentProductId}`);
-        if (!response.ok) throw new Error('Error al obtener el producto actual');
-        const currentProduct: Product = await response.json();
+      if (!currentSubcategory) return; // Esperar a que se cargue la subcategoría
 
+      try {
         const allProductsResponse = await fetch('https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod');
         if (!allProductsResponse.ok) throw new Error('Error al obtener los productos');
-        const allProducts: Product[] = await allProductsResponse.json();
+        const allProducts: ProductDataPDP[] = await allProductsResponse.json();
 
         const filteredProducts = allProducts.filter(
-          product => product.subcategory === currentProduct.subcategory && product.id !== currentProductId
+          product => product.subcategory === currentSubcategory && product.id !== currentProductId
         ).slice(0, 4);
 
         setRelatedProducts(filteredProducts);
@@ -47,10 +81,10 @@ const TPIsection = ({ currentProductId }: TPIsectionProps) => {
     };
 
     fetchRelatedProducts();
-  }, [currentProductId]);
+  }, [currentSubcategory, currentProductId]);
 
-  if (loading) return <Skeleton />;
-  if (error) return <ErrorComponent />;
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>Error al cargar productos relacionados.</p>;
 
   return (
     <div className="bg-[#f8f8f8] p-4 mt-6 rounded-lg shadow">
