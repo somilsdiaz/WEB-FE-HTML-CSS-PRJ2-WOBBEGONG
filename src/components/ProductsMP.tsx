@@ -1,6 +1,8 @@
-import { useCart } from '../context/CartContext'; 
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useCart } from "../context/CartContext";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Skeleton from "./Skeleton";
+import ErrorComponent from "./ErrorComponent";
 
 interface Producto {
   id: number;
@@ -15,37 +17,37 @@ interface Producto {
 const ProductosDestacados: React.FC = () => {
   const { addToCart } = useCart();
   const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
+  const [toastMessage, setToastMessage] = useState("");
   const [addedProducts, setAddedProducts] = useState<number[]>([]);
   const [productos, setProductos] = useState<Producto[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   const handleAddToCart = (producto: Producto, e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent link navigation when clicking the button
+    e.preventDefault();
     const cartItem = {
       id: producto.id,
-      name: producto.nombre,              
-      price: producto.precioNormal,        
-      discountPrice: producto.precioDescuento, 
-      img: producto.imagen,                 
-      quantity: 1,                         
+      name: producto.nombre,
+      price: producto.precioNormal,
+      discountPrice: producto.precioDescuento,
+      img: producto.imagen,
+      quantity: 1,
     };
-    addToCart(cartItem); 
-    
+    addToCart(cartItem);
+
     setToastMessage(`${producto.nombre} agregado al carrito`);
     setShowToast(true);
 
     setAddedProducts((prev) => [...prev, producto.id]);
 
     setTimeout(() => {
-      setAddedProducts((prev) => prev.filter(id => id !== producto.id));
+      setAddedProducts((prev) => prev.filter((id) => id !== producto.id));
     }, 3000);
   };
 
   useEffect(() => {
     if (showToast) {
-      const timer = setTimeout(() => setShowToast(false), 3000); 
+      const timer = setTimeout(() => setShowToast(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [showToast]);
@@ -61,8 +63,9 @@ const ProductosDestacados: React.FC = () => {
         }
         const data = await response.json();
         setProductos(data);
-      } catch (err) {
-        setError((err as Error).message);
+      } catch (error) {
+        setError(true);
+        console.error("Error al cargar los productos:", error);
       } finally {
         setIsLoading(false);
       }
@@ -72,11 +75,11 @@ const ProductosDestacados: React.FC = () => {
   }, []);
 
   if (isLoading) {
-    return <p>Cargando productos...</p>;
+    return <Skeleton />;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <ErrorComponent />;
   }
 
   return (
@@ -100,11 +103,13 @@ const ProductosDestacados: React.FC = () => {
               {producto.nombre}
             </h2>
             <p className="text-sm line-through text-purple-300">
-            ${Number(producto.precioNormal).toFixed(2)}
+              ${Number(producto.precioNormal).toFixed(2)}
             </p>
             <p className="text-white font-bold mb-2">
-            ${Number(producto.precioDescuento).toFixed(2)}
-              <span className="text-pink-500 text-sm">-{producto.descuento}%</span>
+              ${Number(producto.precioDescuento).toFixed(2)}
+              <span className="text-pink-500 text-sm">
+                -{producto.descuento}%
+              </span>
             </p>
 
             <button
@@ -114,7 +119,7 @@ const ProductosDestacados: React.FC = () => {
               {addedProducts.includes(producto.id) ? (
                 <span className="text-green-500">✔️ Agregado</span>
               ) : (
-                'Agregar al Carrito'
+                "Agregar al Carrito"
               )}
             </button>
           </div>
