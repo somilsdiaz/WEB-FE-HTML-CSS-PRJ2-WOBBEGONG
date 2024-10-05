@@ -1,15 +1,26 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 interface BreadcrumbProps {
     separator?: string;
+    productData?: {
+        name: string;
+        subcategory: string;
+    };
 }
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({ separator = ' / ' }) => {
+const Breadcrumb: React.FC<BreadcrumbProps> = ({ separator = ' / ', productData }) => {
     const location = useLocation();
-
-    const basename = '/WEB-FE-HTML-CSS-PRJ2-WOBBEGONG';
-    const pathnames = location.pathname.replace(basename, '').split('/').filter((item) => item);
+    const navigate = useNavigate();
+    const pathnames = location.pathname.split('/').filter((item) => item);
+    const isPdpRoute = pathnames.includes('pdp');
+    const isInSubcategory = pathnames.length === 2 && pathnames[0] === 'plp';
+    const handleProductListClick = (subcategory: string) => {
+        if (isInSubcategory) {
+        } else {
+            navigate(`/plp/${subcategory}`);
+        }
+    };
 
     return (
         <nav 
@@ -25,34 +36,74 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ separator = ' / ' }) => {
                         Inicio
                     </Link>
                 </li>
-                {pathnames.map((name, index) => {
-                    const displayName = name === 'PLP' ? 'Lista de productos' : 
-                    name === 'cart' ? 'Carrito' : decodeURIComponent(name.charAt(0).toUpperCase() + name.slice(1));
-                    const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
+
+                {isPdpRoute && productData && (
+                    <>
+                        <li className="flex items-center">
+                            <span className="mx-2 text-gray-500">{separator}</span>
+                            {/* Botón Lista de productos */}
+                            <button
+                                onClick={() => handleProductListClick(productData.subcategory)}
+                                className={`${
+                                    isInSubcategory
+                                        ? 'cursor-not-allowed text-gray-500'
+                                        : 'text-[#3A1C71] hover:text-[#FFAF7B] transition-colors duration-500 ease-in-out hover:shadow-md p-2 rounded-lg'
+                                }`}
+                                disabled={isInSubcategory}
+                            >
+                                Lista de productos
+                            </button>
+                        </li>
+                        <li className="flex items-center">
+                            <span className="mx-2 text-gray-500">{separator}</span>
+                            <span className="text-[#3A1C71] font-bold">
+                                {productData.subcategory}
+                            </span>
+                        </li>
+                        <li className="flex items-center">
+                            <span className="mx-2 text-gray-500">{separator}</span>
+                            <span className="text-[#3A1C71] font-bold">
+                                Descripción del producto
+                            </span>
+                        </li>
+                        <li className="flex items-center">
+                            <span className="mx-2 text-gray-500">{separator}</span>
+                            <span className="text-[#3A1C71] font-bold">
+                                {productData.name}
+                            </span>
+                        </li>
+                    </>
+                )}
+
+                {!isPdpRoute && pathnames.map((name, index) => {
                     const isLast = index === pathnames.length - 1;
+
+                    const displayName = name.toLowerCase() === 'plp' ? 'Lista de productos' :
+                        name.toLowerCase() === 'cart' ? 'Carrito' :
+                        decodeURIComponent(name.charAt(0).toUpperCase() + name.slice(1));
+
+                    const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
 
                     return (
                         <li key={name} className="flex items-center">
                             <span className="mx-2 text-gray-500">
                                 {separator}
                             </span>
-                            {isLast ? (
+                            {isLast && isInSubcategory ? (
+                                <span className="text-[#3A1C71] font-bold">
+                                    {displayName}
+                                </span>
+                            ) : isLast ? (
                                 <span className="text-[#3A1C71] font-bold">
                                     {displayName}
                                 </span>
                             ) : (
-                                name === 'PLP' ? (
-                                    <span className="text-[#3A1C71] hover:text-[#FFAF7B] transition-colors duration-500 ease-in-out hover:shadow-md p-0 rounded-lg">
-                                        {displayName}
-                                    </span>
-                                ) : (
-                                    <Link 
-                                        to={routeTo} 
-                                        className="text-[#3A1C71] hover:text-[#FFAF7B] transition-colors duration-500 ease-in-out hover:shadow-md p-2 rounded-lg"
-                                    >
-                                        {displayName}
-                                    </Link>
-                                )
+                                <Link 
+                                    to={routeTo} 
+                                    className="text-[#3A1C71] hover:text-[#FFAF7B] transition-colors duration-500 ease-in-out hover:shadow-md p-2 rounded-lg"
+                                >
+                                    {displayName}
+                                </Link>
                             )}
                         </li>
                     );
