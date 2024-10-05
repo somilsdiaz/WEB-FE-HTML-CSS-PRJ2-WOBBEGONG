@@ -6,7 +6,7 @@ import Breadcrumb from '../components/Breadcrumb';
 
 type MainLayoutProps = {
   children: React.ReactNode;
-  productData?: { // Paso opcional para manejar el breadcrumb con datos del producto
+  productData?: { 
     name: string;
     subcategory: string;
     description: string;
