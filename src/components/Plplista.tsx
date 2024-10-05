@@ -1,6 +1,8 @@
 import { useCart } from '../context/CartContext';
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import Skeleton from './Skeleton';
+import ErrorComponent from './ErrorComponent';
 
 type Product = {
   id: number;
@@ -72,8 +74,8 @@ const PLP: React.FC = () => {
     }
   }, [showToast]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error loading products</div>;
+  if (loading) return <Skeleton />;
+  if (error) return <ErrorComponent />;
 
   return (
     <div className="bg-[#e5e5f7] p-4">

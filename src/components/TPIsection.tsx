@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Asegúrate de importar Link
+import { Link } from "react-router-dom"; 
+import Skeleton from "./Skeleton";
+import ErrorComponent from "./ErrorComponent";
 
 type Product = {
   id: number;
@@ -47,8 +49,8 @@ const TPIsection = ({ currentProductId }: TPIsectionProps) => {
     fetchRelatedProducts();
   }, [currentProductId]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error fetching related products.</p>;
+  if (loading) return <Skeleton />;
+  if (error) return <ErrorComponent />;
 
   return (
     <div className="bg-[#f8f8f8] p-4 mt-6 rounded-lg shadow">
