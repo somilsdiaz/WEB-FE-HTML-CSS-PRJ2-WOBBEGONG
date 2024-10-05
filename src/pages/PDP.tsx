@@ -66,9 +66,9 @@ const PDP = () => {
   return (
     <MainLayout
       productData={{
-        name: productData.name || 'Producto Desconocido',  // Asignar valor por defecto
-        subcategory: productData.subcategory || 'Subcategoría desconocida',  // Valor por defecto
-        description: productData.description || 'Descripción no disponible'  // Valor por defecto
+        name: productData.name || productData.nombre || 'Producto Desconocido',
+        subcategory: productData.subcategory || 'Subcategoría desconocida',  
+        description: productData.description || 'Descripción no disponible'  
       }}
     >
       <main className="min-h-screen bg-[#e5e5f7] bg-[radial-gradient(#444cf7_0.5px,#e5e5f7_0.5px)] bg-[length:10px_10px] opacity-80 p-4">
