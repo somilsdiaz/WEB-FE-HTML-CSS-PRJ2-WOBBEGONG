@@ -1,21 +1,24 @@
-// src/layout/MainLayout.tsx
 import React from 'react';
 import Header from '../components/Header';
 import Subheader from '../components/Subheader';
 import Footer from '../components/Footer';
 import Breadcrumb from '../components/Breadcrumb';
 
-
 type MainLayoutProps = {
   children: React.ReactNode;
+  productData?: { // Paso opcional para manejar el breadcrumb con datos del producto
+    name: string;
+    subcategory: string;
+    description: string;
+  };
 };
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ children, productData }) => {
   return (
     <div >
       <Header cartLink="/cart" accountLink="/account" />
       <Subheader />
-        <Breadcrumb />
+        <Breadcrumb productData={productData} />
         {children} 
       <Footer />
     </div>
