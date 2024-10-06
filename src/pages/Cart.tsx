@@ -1,18 +1,26 @@
+//src/pages/Cart.tsx
 import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import MainLayout from "../layouts/MainLayout";
 import CartSummary from "../components/CartSummary";
+import { useNavigate } from "react-router-dom"; // Para redireccionar
 
 const ShoppingCart: React.FC = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
   const [removingItemId, setRemovingItemId] = useState<number | null>(null);
+  const navigate = useNavigate(); // Para usar la función de redirección
 
-  const handleRemove = (id: number) => {
+  const handleRemove = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation(); // Evita que se dispare el clic del contenedor
     setRemovingItemId(id);
     setTimeout(() => {
       removeFromCart(id);
       setRemovingItemId(null);
     }, 500);
+  };
+
+  const handleNavigateToPDP = (id: number) => {
+    navigate(`/pdp/fhp/${id}`); // Redirige al PDP del producto
   };
 
   if (cart.products.length === 0) {
@@ -36,7 +44,7 @@ const ShoppingCart: React.FC = () => {
   return (
     <MainLayout>
       <main className="flex flex-col lg:flex-row justify-between items-center py-4 px-4 lg:px-28 space-y-8 lg:space-y-0">
-        {/*productos*/}
+        {/* productos */}
         <section
           className="flex-2 flex flex-col justify-center space-y-8 lg:mr-8"
           style={{ transition: "all 3s ease-in-out" }}
@@ -45,29 +53,35 @@ const ShoppingCart: React.FC = () => {
             <div
               key={item.id}
               className={`bg-[#dad5ec] p-6 flex flex-col lg:flex-row items-center lg:items-center rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300
-                                ${
-                                  removingItemId === item.id
-                                    ? "transition-transform transform -translate-x-full opacity-0"
-                                    : "opacity-100 scale-100"
-                                }
-                                hover:scale`}
+                            ${
+                              removingItemId === item.id
+                                ? "transition-transform transform -translate-x-full opacity-0"
+                                : "opacity-100 scale-100"
+                            }
+                            hover:scale cursor-pointer`}
               style={{
                 transition:
                   "transform 0.5s ease, opacity 0.5s ease, scale 0.5s ease",
               }}
+              onClick={() => handleNavigateToPDP(item.id)}
             >
               {/* img producto */}
               <div className="flex-shrink-0">
                 <img
                   src={item.img}
                   alt={item.name}
-                  className="max-w-[150px] mr-8 mb-4 lg:mb-0 rounded-lg transform transition-transform duration-300 hover:scale-125"
+                  className="max-w-[150px] mr-8 mb-4 lg:mb-0 rounded-lg transform transition-transform duration-300 hover:scale-110"
+                  onClick={(e) => { 
+                    e.stopPropagation(); handleNavigateToPDP(item.id);
+                  }}
                 />
               </div>
 
               {/* opciones de envio y cantidad */}
-              <div className="flex-1 w-full lg:w-auto text-center lg:text-left">
-                <h3 className="font-bold text-lg lg:text-xl text-black break-words hover:underline transition duration-300 ease-in-out">
+              <div onClick={(e) => {e.stopPropagation();}} className="flex-1 w-full lg:w-auto text-center lg:text-left">
+                <h3 onClick={() => {handleNavigateToPDP(item.id);}}
+                  className="font-bold  text-xl lg:text-lg text-black break-words transition duration-500 ease-in-out
+                  hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#4A3F75] hover:to-[#9F7AEA]">
                   {item.name}
                 </h3>
 
@@ -100,7 +114,7 @@ const ShoppingCart: React.FC = () => {
                   </label>
                 </div>
 
-                {/* cantidad a seleccionar*/}
+                {/* cantidad a seleccionar */}
                 <div className="mt-4 flex items-center">
                   <label htmlFor={`quantity-${item.id}`} className="font-bold">
                     Cantidad:
@@ -122,7 +136,7 @@ const ShoppingCart: React.FC = () => {
               </div>
 
               {/* detalles de precio */}
-              <div className="flex flex-col text-center lg:text-right text-xl w-full lg:w-auto mt-4 lg:mt-0 lg:items-center lg:ml-4">
+              <div onClick={(e) => {e.stopPropagation();}} className="flex flex-col text-center lg:text-right text-xl w-full lg:w-auto mt-4 lg:mt-0 lg:items-center lg:ml-4">
                 <p className="line-through text-red-500">
                   $
                   {item.price.toLocaleString("es-ES", {
@@ -138,8 +152,8 @@ const ShoppingCart: React.FC = () => {
                   })}
                 </p>
                 <button
-                  onClick={() => handleRemove(item.id)}
-                  className="text-red-500 mt-2 hover:underline transition duration-300 ease-in-out"
+                  onClick={(e) => handleRemove(item.id, e)}
+                  className="text-red-500 mt-2 hover:text-red-600 transition duration-300 ease-in-out"
                 >
                   Eliminar
                 </button>
