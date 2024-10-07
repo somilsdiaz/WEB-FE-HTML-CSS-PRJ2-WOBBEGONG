@@ -23,12 +23,7 @@ const ProductosDestacados: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   
-  const { isCartRoute, setIsCartRoute } = useCart();
-
-  //cambio valor de isCartRoute a true
-  const handleCartPageNavigation = () => {
-    setIsCartRoute(true); // Cambiar el valor global
-  };
+  const {setIsCartRoute} = useCart();
 
   //cambio de isCartRoute a false
   const handleHomeNavigation = () => {

@@ -46,13 +46,8 @@ const PLP: React.FC = () => {
   const filteredProducts = products.filter((product) => product.subcategory === subcategory);
 
 
-  const { isCartRoute, setIsCartRoute } = useCart();
-
-  //cambio valor de isCartRoute a true
-  const handleCartPageNavigation = () => {
-    setIsCartRoute(true); // Cambiar el valor global
-  };
-
+  const {setIsCartRoute } = useCart();
+  
   //cambio de isCartRoute a false
   const handleHomeNavigation = () => {
     setIsCartRoute(false); // Cambiar el valor global

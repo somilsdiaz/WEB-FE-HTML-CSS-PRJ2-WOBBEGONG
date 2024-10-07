@@ -10,18 +10,13 @@ const ShoppingCart: React.FC = () => {
   const [removingItemId, setRemovingItemId] = useState<number | null>(null);
   const navigate = useNavigate(); // Para usar la función de redirección
 
-  const { isCartRoute, setIsCartRoute } = useCart();
+  const {setIsCartRoute} = useCart();
 
   // cambiar valor de isCartRoute a true
   const handleCartPageNavigation = () => {
     setIsCartRoute(true); // valor global
   };
 
-  //cambiar valor de isCartRoute a false
-  const handleHomeNavigation = () => {
-    setIsCartRoute(false); //valor global
-  };
-  
   const handleRemove = (id: number, e: React.MouseEvent) => {
     e.stopPropagation(); // Evita que se dispare el clic del contenedor
     setRemovingItemId(id);

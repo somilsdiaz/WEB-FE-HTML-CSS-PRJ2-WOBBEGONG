@@ -17,7 +17,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ separator = ' / ', productData 
     const navigate = useNavigate();
     const pathnames = location.pathname.split('/').filter((item) => item);
     const isPdpRoute = pathnames.includes('pdp');
-    const { isCartRoute, setIsCartRoute } = useCart();
+    const { isCartRoute} = useCart();
 
     console.log(isCartRoute);
 
