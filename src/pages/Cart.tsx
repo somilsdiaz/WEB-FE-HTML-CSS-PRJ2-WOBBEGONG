@@ -10,6 +10,18 @@ const ShoppingCart: React.FC = () => {
   const [removingItemId, setRemovingItemId] = useState<number | null>(null);
   const navigate = useNavigate(); // Para usar la función de redirección
 
+  const { isCartRoute, setIsCartRoute } = useCart();
+
+  // cambiar valor de isCartRoute a true
+  const handleCartPageNavigation = () => {
+    setIsCartRoute(true); // valor global
+  };
+
+  //cambiar valor de isCartRoute a false
+  const handleHomeNavigation = () => {
+    setIsCartRoute(false); //valor global
+  };
+  
   const handleRemove = (id: number, e: React.MouseEvent) => {
     e.stopPropagation(); // Evita que se dispare el clic del contenedor
     setRemovingItemId(id);
@@ -71,7 +83,10 @@ const ShoppingCart: React.FC = () => {
                 transition:
                   "transform 0.5s ease, opacity 0.5s ease, scale 0.5s ease",
               }}
-              onClick={() => handleNavigateToPDP(item.id, item.origin)}
+              onClick={() => {
+                handleCartPageNavigation(); // Cambiar isCartRoute a true
+                handleNavigateToPDP(item.id, item.origin); // Navegar al PDP
+            }}
             >
               {/* img producto */}
               <div className="flex-shrink-0">
@@ -80,14 +95,14 @@ const ShoppingCart: React.FC = () => {
                   alt={item.name}
                   className="max-w-[150px] mr-8 mb-4 lg:mb-0 rounded-lg transform transition-transform duration-300 hover:scale-110"
                   onClick={(e) => { 
-                    e.stopPropagation(); handleNavigateToPDP(item.id, item.origin);
+                    e.stopPropagation(); handleNavigateToPDP(item.id, item.origin); handleCartPageNavigation();
                   }}
                 />
               </div>
 
               {/* opciones de envio y cantidad */}
               <div onClick={(e) => {e.stopPropagation();}} className="flex-1 w-full lg:w-auto text-center lg:text-left">
-                <h3 onClick={() => {handleNavigateToPDP(item.id, item.origin);}}
+                <h3 onClick={() => {handleCartPageNavigation(); handleNavigateToPDP(item.id, item.origin);}}
                   className="font-bold  text-xl lg:text-lg text-black break-words transition duration-500 ease-in-out
                   hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#4A3F75] hover:to-[#9F7AEA]">
                   {item.name}

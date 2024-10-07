@@ -45,6 +45,19 @@ const PLP: React.FC = () => {
 
   const filteredProducts = products.filter((product) => product.subcategory === subcategory);
 
+
+  const { isCartRoute, setIsCartRoute } = useCart();
+
+  //cambio valor de isCartRoute a true
+  const handleCartPageNavigation = () => {
+    setIsCartRoute(true); // Cambiar el valor global
+  };
+
+  //cambio de isCartRoute a false
+  const handleHomeNavigation = () => {
+    setIsCartRoute(false); // Cambiar el valor global
+  };
+
   const handleAddToCart = (product: Product, e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -110,6 +123,7 @@ const PLP: React.FC = () => {
             <Link 
               to={`/pdp/pdp/${product.id}`}
               className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row"
+              onClick={() => handleHomeNavigation()}
             >
               <div className="w-full md:w-1/3 h-48 md:h-auto bg-[#f7f7f7] bg-center bg-no-repeat bg-contain"
                    style={{ backgroundImage: `url(${product.img})` }}></div>

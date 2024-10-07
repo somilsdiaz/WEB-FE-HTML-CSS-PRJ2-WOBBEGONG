@@ -28,6 +28,8 @@ interface CartContextType {
     addToCart: (item: CartItem) => void;
     removeFromCart: (id: number) => void;
     updateQuantity: (id: number, quantity: number) => void;
+    isCartRoute: boolean;  // Añadir isCartRoute
+    setIsCartRoute: (value: boolean) => void; // Función para actualizar isCartRoute
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -50,6 +52,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     products: [],
                 };
     });
+    const [isCartRoute, setIsCartRoute] = useState<boolean>(false);
 
     // se guarda el carrito en localStorage cada vez que haya un cambio
     useEffect(() => {
@@ -122,12 +125,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, isCartRoute, setIsCartRoute }}>
             {children}
         </CartContext.Provider>
     );
 };
-
 export const useCart = () => {
     const context = useContext(CartContext);
     if (!context) {

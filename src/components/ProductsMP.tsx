@@ -22,6 +22,18 @@ const ProductosDestacados: React.FC = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  
+  const { isCartRoute, setIsCartRoute } = useCart();
+
+  //cambio valor de isCartRoute a true
+  const handleCartPageNavigation = () => {
+    setIsCartRoute(true); // Cambiar el valor global
+  };
+
+  //cambio de isCartRoute a false
+  const handleHomeNavigation = () => {
+    setIsCartRoute(false); // Cambiar el valor global
+  };
 
   const handleAddToCart = (producto: Producto, e: React.MouseEvent) => {
     e.preventDefault();
@@ -90,6 +102,7 @@ const ProductosDestacados: React.FC = () => {
           to={`/pdp/fhp/${producto.id}`}
           key={producto.id}
           className="relative bg-custom-gradient p-4 rounded-lg text-center shadow-lg flex flex-col justify-between h-full overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
+          onClick={() => handleHomeNavigation()}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-transparent z-10"></div>
           <div className="relative z-20 flex justify-center items-center mb-auto h-[300px]">
