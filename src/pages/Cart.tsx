@@ -19,9 +19,17 @@ const ShoppingCart: React.FC = () => {
     }, 500);
   };
 
-  const handleNavigateToPDP = (id: number) => {
-    navigate(`/pdp/fhp/${id}`); // Redirige al PDP del producto
-  };
+  const handleNavigateToPDP = (id: number, origin: string) => {
+    console.log("in cart.tsx",origin)
+    if (origin === "PLP") {
+        // Redirige al PDP para productos de "PLP/{subcategoria}"
+        navigate(`/pdp/pdp/${id}`);
+    } else if (origin == "/") {
+        // Redirige al PDP para productos de la ruta "/"
+        navigate(`/pdp/fhp/${id}`);
+    }
+};
+
 
   if (cart.products.length === 0) {
     return (
@@ -63,7 +71,7 @@ const ShoppingCart: React.FC = () => {
                 transition:
                   "transform 0.5s ease, opacity 0.5s ease, scale 0.5s ease",
               }}
-              onClick={() => handleNavigateToPDP(item.id)}
+              onClick={() => handleNavigateToPDP(item.id, item.origin)}
             >
               {/* img producto */}
               <div className="flex-shrink-0">
@@ -72,14 +80,14 @@ const ShoppingCart: React.FC = () => {
                   alt={item.name}
                   className="max-w-[150px] mr-8 mb-4 lg:mb-0 rounded-lg transform transition-transform duration-300 hover:scale-110"
                   onClick={(e) => { 
-                    e.stopPropagation(); handleNavigateToPDP(item.id);
+                    e.stopPropagation(); handleNavigateToPDP(item.id, item.origin);
                   }}
                 />
               </div>
 
               {/* opciones de envio y cantidad */}
               <div onClick={(e) => {e.stopPropagation();}} className="flex-1 w-full lg:w-auto text-center lg:text-left">
-                <h3 onClick={() => {handleNavigateToPDP(item.id);}}
+                <h3 onClick={() => {handleNavigateToPDP(item.id, item.origin);}}
                   className="font-bold  text-xl lg:text-lg text-black break-words transition duration-500 ease-in-out
                   hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#4A3F75] hover:to-[#9F7AEA]">
                   {item.name}

@@ -7,6 +7,7 @@ interface CartItem {
     discountPrice: number;
     img: string;
     quantity: number;
+    origin: string; // solucion para los tipos de productos /home y /PLP
 }
 
 interface CartSummary {
@@ -30,11 +31,10 @@ interface CartContextType {
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
-
 const CART_STORAGE_KEY = 'cartData';
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    //aqui leeemos el carrito desde localStorage al cargar la página
+    //se hace una lectura desde localStorage al cargar la página 
     const [cart, setCart] = useState<Cart>(() => {
         const storedCart = localStorage.getItem(CART_STORAGE_KEY);
         return storedCart
@@ -51,7 +51,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 };
     });
 
-    //se guarda el carrito en localStorage cada vez que se actualice
+    // se guarda el carrito en localStorage cada vez que haya un cambio
     useEffect(() => {
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     }, [cart]);
@@ -74,6 +74,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     const addToCart = (item: CartItem) => {
+        console.log("in  cartContext.tsx",item.origin)
         setCart((prevCart) => {
             const existingItem = prevCart.products.find((cartItem) => cartItem.id === item.id);
             let updatedProducts;
@@ -86,7 +87,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             } else {
                 updatedProducts = [...prevCart.products, { ...item, quantity: 1 }];
             }
-
             return {
                 ...prevCart,
                 products: updatedProducts,
@@ -94,11 +94,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             };
         });
     };
+    
+    
 
     const removeFromCart = (id: number) => {
         setCart((prevCart) => {
             const updatedProducts = prevCart.products.filter((cartItem) => cartItem.id !== id);
-
             return {
                 ...prevCart,
                 products: updatedProducts,
@@ -112,7 +113,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const updatedProducts = prevCart.products.map((cartItem) =>
                 cartItem.id === id ? { ...cartItem, quantity } : cartItem
             );
-
             return {
                 ...prevCart,
                 products: updatedProducts,

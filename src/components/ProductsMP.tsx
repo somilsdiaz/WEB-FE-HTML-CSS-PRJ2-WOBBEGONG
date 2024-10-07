@@ -32,6 +32,7 @@ const ProductosDestacados: React.FC = () => {
       discountPrice: producto.precioDescuento,
       img: producto.imagen,
       quantity: 1,
+      origin: "/", //Este producto pertence al home (productos destacados)
     };
     addToCart(cartItem);
 

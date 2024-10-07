@@ -47,6 +47,7 @@ const PLP: React.FC = () => {
 
   const handleAddToCart = (product: Product, e: React.MouseEvent) => {
     e.preventDefault();
+
     const cartItem = {
       id: product.id,
       name: product.name,
@@ -54,7 +55,9 @@ const PLP: React.FC = () => {
       discountPrice: product.discountPrice,
       img: product.img,
       quantity: 1,
+      origin: "PLP", //Este producto pertenece a la lista de productos
     };
+
     addToCart(cartItem);
 
     setToastMessage(`${product.name} agregado al carrito`);
