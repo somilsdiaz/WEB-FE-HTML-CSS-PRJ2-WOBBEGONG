@@ -38,6 +38,7 @@ const ShoppingCart: React.FC = () => {
 };
 
 
+
   if (cart.products.length === 0) {
     return (
       <MainLayout>
@@ -67,13 +68,11 @@ const ShoppingCart: React.FC = () => {
           {cart.products.map((item) => (
             <div
               key={item.id}
-              className={`bg-[#dad5ec] p-6 flex flex-col lg:flex-row items-center lg:items-center rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300
-                            ${
-                              removingItemId === item.id
-                                ? "transition-transform transform -translate-x-full opacity-0"
-                                : "opacity-100 scale-100"
-                            }
-                            hover:scale cursor-pointer`}
+              className={`bg-gradient-to-r from-[#e9e5f2] via-[#dad5ec] to-[#c4b5e2] p-6 flex flex-col lg:flex-row items-center lg:items-center rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500 ease-in-out transform ${
+                removingItemId === item.id
+                  ? "transition-transform transform -translate-x-full opacity-0"
+                  : "opacity-100 scale-100"
+              } hover:scale cursor-pointer`}
               style={{
                 transition:
                   "transform 0.5s ease, opacity 0.5s ease, scale 0.5s ease",
@@ -89,17 +88,28 @@ const ShoppingCart: React.FC = () => {
                   src={item.img}
                   alt={item.name}
                   className="max-w-[150px] mr-8 mb-4 lg:mb-0 rounded-lg transform transition-transform duration-300 hover:scale-110"
-                  onClick={(e) => { 
-                    e.stopPropagation(); handleNavigateToPDP(item.id, item.origin); handleCartPageNavigation();
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNavigateToPDP(item.id, item.origin);
+                    handleCartPageNavigation();
                   }}
                 />
               </div>
 
               {/* opciones de envio y cantidad */}
-              <div onClick={(e) => {e.stopPropagation();}} className="flex-1 w-full lg:w-auto text-center lg:text-left">
-                <h3 onClick={() => {handleCartPageNavigation(); handleNavigateToPDP(item.id, item.origin);}}
-                  className="font-bold  text-xl lg:text-lg text-black break-words transition duration-500 ease-in-out
-                  hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#4A3F75] hover:to-[#9F7AEA]">
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                className="flex-1 w-full lg:w-auto text-center lg:text-left"
+              >
+                <h3
+                  onClick={() => {
+                    handleCartPageNavigation();
+                    handleNavigateToPDP(item.id, item.origin);
+                  }}
+                  className="font-bold text-xl lg:text-lg text-black break-words transition duration-500 ease-in-out hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r from-[#4A3F75] to-[#9F7AEA]"
+                >
                   {item.name}
                 </h3>
 
@@ -154,15 +164,20 @@ const ShoppingCart: React.FC = () => {
               </div>
 
               {/* detalles de precio */}
-              <div onClick={(e) => {e.stopPropagation();}} className="flex flex-col text-center lg:text-right text-xl w-full lg:w-auto mt-4 lg:mt-0 lg:items-center lg:ml-4">
-                <p className="line-through text-red-500">
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                className="flex flex-col text-center lg:text-right text-xl w-full lg:w-auto mt-4 lg:mt-0 lg:items-center lg:ml-4"
+              >
+                <p className="line-through text-red-500 text-lg">
                   $
                   {item.price.toLocaleString("es-ES", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
                 </p>
-                <p className="font-bold text-black">
+                <p className="font-bold text-black text-xl">
                   $
                   {item.discountPrice.toLocaleString("es-ES", {
                     minimumFractionDigits: 2,
