@@ -68,7 +68,7 @@ const ShoppingCart: React.FC = () => {
           {cart.products.map((item) => (
             <div
               key={item.id}
-              className={`bg-gradient-to-r from-[#e9e5f2] via-[#dad5ec] to-[#c4b5e2] p-6 flex flex-col lg:flex-row items-center lg:items-center rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500 ease-in-out transform ${
+              className={`bg-gradient-to-r from-[#c4b5e2] via-[#dad5ec] to-[#e9e5f2] p-6 flex flex-col lg:flex-row items-center lg:items-center rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500 ease-in-out transform ${
                 removingItemId === item.id
                   ? "transition-transform transform -translate-x-full opacity-0"
                   : "opacity-100 scale-100"
