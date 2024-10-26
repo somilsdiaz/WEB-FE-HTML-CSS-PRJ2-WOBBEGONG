@@ -43,6 +43,7 @@ const PDPdetalle: React.FC<PdpdetalleProps> = ({ productData }) => {
       discountPrice: normalizedData.discountPrice,
       img: normalizedData.img,
       quantity: 1,
+      origin: "PLP",
     };
     addToCart(cartItem);
     setIsAdded(true);
