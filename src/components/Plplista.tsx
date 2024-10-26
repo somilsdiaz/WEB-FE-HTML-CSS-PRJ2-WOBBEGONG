@@ -30,7 +30,7 @@ const PLP: React.FC = () => {
   const [addedProducts, setAddedProducts] = useState<number[]>([]);
 
   useEffect(() => {
-    fetch('https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod')
+    fetch('https://web-fe-prj2-api-wobbegong-qfq7.onrender.com/dataPDPprod')
       .then(response => response.json())
       .then(data => {
         setProducts(data);

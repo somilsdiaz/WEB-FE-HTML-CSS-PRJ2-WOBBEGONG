@@ -34,14 +34,14 @@ const TPIsection = ({ currentProductId }: TPIsectionProps) => {
     const fetchCurrentProduct = async () => {
       try {
         // Intentar obtener el producto actual de datafhp
-        const responseFHP = await fetch(`https://web-fe-prj2-api-wobbegong.onrender.com/datafhp/${currentProductId}`);
+        const responseFHP = await fetch(`https://web-fe-prj2-api-wobbegong-qfq7.onrender.com/datafhp/${currentProductId}`);
         
         if (responseFHP.ok) {
           const currentProduct: ProductDataFHP = await responseFHP.json();
           setCurrentSubcategory(currentProduct.subcategory);
         } else {
           // Si no se encuentra, intentar con dataPDPprod
-          const responsePDP = await fetch(`https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod/${currentProductId}`);
+          const responsePDP = await fetch(`https://web-fe-prj2-api-wobbegong-qfq7.onrender.com/dataPDPprod/${currentProductId}`);
           if (responsePDP.ok) {
             const currentProduct: ProductDataPDP = await responsePDP.json();
             setCurrentSubcategory(currentProduct.subcategory);
@@ -63,7 +63,7 @@ const TPIsection = ({ currentProductId }: TPIsectionProps) => {
       if (!currentSubcategory) return; // Esperar a que se cargue la subcategoría
 
       try {
-        const allProductsResponse = await fetch('https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod');
+        const allProductsResponse = await fetch('https://web-fe-prj2-api-wobbegong-qfq7.onrender.com/dataPDPprod');
         if (!allProductsResponse.ok) throw new Error('Error al obtener los productos');
         const allProducts: ProductDataPDP[] = await allProductsResponse.json();
 

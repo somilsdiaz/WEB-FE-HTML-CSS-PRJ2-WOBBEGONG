@@ -38,8 +38,8 @@ const PDP = () => {
       try {
         const isPlpProduct = location.pathname.includes('/pdp/pdp/');
         const apiUrl = isPlpProduct
-          ? `https://web-fe-prj2-api-wobbegong.onrender.com/dataPDPprod/${id}`
-          : `https://web-fe-prj2-api-wobbegong.onrender.com/datafhp/${id}`;
+          ? `https://web-fe-prj2-api-wobbegong-qfq7.onrender.com/dataPDPprod/${id}`
+          : `https://web-fe-prj2-api-wobbegong-qfq7.onrender.com/datafhp/${id}`;
         
         const response = await fetch(apiUrl);
         
