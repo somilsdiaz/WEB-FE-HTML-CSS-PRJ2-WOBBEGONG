@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import MainLayout from "../layouts/MainLayout";
-import CartSummary from "../components/CartSummary";
 import { useNavigate } from "react-router-dom"; // Para redireccionar
 
 const ShoppingCart: React.FC = () => {
@@ -36,8 +35,6 @@ const ShoppingCart: React.FC = () => {
         navigate(`/pdp/fhp/${id}`);
     }
 };
-
-
 
   if (cart.products.length === 0) {
     return (
@@ -195,7 +192,51 @@ const ShoppingCart: React.FC = () => {
           ))}
         </section>
 
-        <CartSummary cartItems={cart.products} />
+        {/* seccion para colocar el resumen de compra*/} 
+		    <section className="flex-1 bg-[#f7f5ff] ml-4 p-6 shadow-xl border-2 border-[#5c4dbb] flex flex-col items-center text-lg rounded-lg transition-all">
+          <h2 className="mb-4 text-2xl font-semibold text-[#442da2]">Resumen de compra</h2>
+          
+          <p className="mb-4 flex justify-between w-full max-w-[90%]">
+              Subtotal sin descuentos:
+              <span className="font-semibold text-[#333]">
+                  {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 2 }).format(cart.summary.subtotal).replace("COP", "")}
+              </span>
+          </p>
+
+          <p className="mb-4 flex justify-between w-full max-w-[90%]">
+              Envío: 
+              <span className="font-semibold text-[#333]">
+                  {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 2 }).format(cart.summary.shipping).replace("COP", "")}
+              </span>
+          </p>
+
+          <p className="mb-4 flex justify-between w-full max-w-[90%]">
+              <span className="text-red-600">Descuentos: </span>
+              <span className="font-semibold text-red-600">
+                  -{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 2 }).format(cart.summary.discounts).replace("COP", "")}
+              </span>
+          </p>
+
+          <p className="mb-4 flex justify-between w-full max-w-[90%]">
+              <span className="text-yellow-600">IVA (19%): </span>
+              <span className="font-semibold text-yellow-600">
+                  {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 2 }).format(cart.summary.taxes).replace("COP", "")}
+              </span>
+          </p>
+
+          <p className="mb-4 font-bold flex justify-between w-full max-w-[90%] text-xl">
+              <span className="text-[#442da2]">Total: </span>
+              <span className="text-[#442da2]">
+                  {new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 2 }).format(cart.summary.total).replace("COP", "")}
+              </span>
+          </p>
+
+          <div className="border-b border-gray-300 w-[90%] mb-12"></div>
+          
+          <button className="bg-[#442da2] hover:bg-[#5c4dbb] transition-all text-white py-3 w-[90%] rounded-md mt-auto cursor-pointer shadow-lg transform hover:scale-105">
+              Proceder al pago
+          </button>
+          </section>
       </main>
     </MainLayout>
   );
