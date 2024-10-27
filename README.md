@@ -1,6 +1,6 @@
 # WEB-FE-PRJ2-API-WOBBEGONG
 
-Este repositorio contiene el frontend completo del proyecto **WEB-FE-HTML-CSS-PRJ2-WOBBEGONG**, desarrollado utilizando **React**, **Vite** y **Tailwind CSS**. El proyecto está estructurado para ofrecer una experiencia de usuario responsiva y dinámica, enfocada en el comercio electrónico y optimizada para un rendimiento superior en diversos dispositivos.
+Este repositorio contiene el frontend completo del proyecto **WEB-FE-HTML-CSS-PRJ2-WOBBEGONG**, desarrollado utilizando **React**, **Vite** y **Tailwind CSS**. Este proyecto de desarrollo frontend fue realizado por un equipo de cinco desarrolladores durante tres semanas, siguiendo la metodología de desarrollo ágil **Scrum**, con sprints semanales y reuniones diarias para optimizar la colaboración y el progreso. El proyecto está estructurado para ofrecer una experiencia de usuario responsiva y dinámica, enfocada en el comercio electrónico y optimizada para un rendimiento superior en diversos dispositivos.
 
 El frontend de esta aplicación se conecta con una **API Mock** implementada mediante **JSON Server**. La API, desplegada en [Render](https://web-fe-prj2-api-wobbegong-qfq7.onrender.com/), proporciona datos simulados para productos, categorías, y detalles promocionales, necesarios para probar y visualizar todas las funcionalidades de la aplicación sin depender de una API real. Además, el proyecto usa **Tanstack Query** para gestionar de forma eficiente la obtención, cacheo y sincronización de datos en React.
 
@@ -9,26 +9,9 @@ El frontend de esta aplicación se conecta con una **API Mock** implementada med
 - [Descripción de la API](#descripción-de-la-api)
 - [Dependencias del Proyecto](#dependencias-del-proyecto)
 - [Componentes](#componentes)
-  - [Banner](#componente-banner)
-  - [Breadcrumb](#componente-breadcrumb)
-  - [ErrorComponent](#errorcomponent)
-  - [Filter Component](#filter-component)
-  - [Footer Component](#footer-component)
-  - [Header Component](#header-component)
-  - [PromoImage Component](#promoimage-component)
-  - [PDPdetalle Component](#pdpdetalle-component)
-  - [Pdpspecs Component](#pdpspecs-component)
-  - [PLP Component](#plp-component)
-  - [ProductosDestacados Component](#productosdestacados-component)
-  - [Skeleton Component](#skeleton-component)
-  - [Subheader Component](#subheader-component)
-  - [TPIsection Component](#tpisecton-component)
-  - [CartContext Component](#cartcontext-component)
-  - [MainLayout Component](#mainlayout-component)
-  - [ShoppingCart Component](#shoppingcart-component)
-  - [Home Component](#home-component)
 - [Rutas de la Aplicación](#rutas-de-la-aplicación)
 - [Instalación y Ejecución](#instalación-y-ejecución)
+- [Contribución](#contribución)
 
 ## Descripción de la API
 
@@ -43,80 +26,28 @@ La API Mock sirve como backend simulado, proporcionando datos estructurados para
 - **React**: Framework principal para la construcción de interfaces de usuario.
 - **Vite**: Herramienta de construcción y desarrollo de alto rendimiento.
 - **Tailwind CSS**: Framework CSS utilizado para crear un diseño responsivo y estilizado.
+- **Tanstack Query**: Administración avanzada de datos, caché y sincronización en React.
 
 ## Componentes
 
-### Banner
-
-Un componente React para secciones promocionales, que incluye título, descripción, botón de acción y una imagen seleccionada mediante un identificador. Adaptado para pantallas móviles y de escritorio.
-
-### Breadcrumb
-
-Un componente de navegación para mostrar la ruta del usuario dentro de la estructura de la página.
-
-### ErrorComponent
-
-Este componente muestra un mensaje de error y un ícono de advertencia para una comunicación clara en caso de fallos en la carga de datos.
-
-### Filter Component
-
-Permite a los usuarios filtrar productos según subcategorías con opciones dinámicas y un diseño responsivo.
-
-### Footer Component
-
-Componente que incluye información de la empresa, redes sociales, métodos de pago y enlaces útiles, con diseño adaptable a varios dispositivos.
-
-### Header Component
-
-Encabezado de la aplicación que integra logotipo, barra de búsqueda y enlaces a funciones como el carrito y cuenta de usuario.
-
-### PromoImage Component
-
-Renderiza imágenes promocionales basadas en un identificador, aportando contenido visual relevante.
-
-### PDPdetalle Component
-
-Este componente despliega los detalles del producto en una página de detalles, permitiendo agregar productos al carrito y calcular descuentos.
-
-### Pdpspecs Component
-
-Muestra especificaciones técnicas de un producto en un formato colapsable.
-
-### PLP Component
-
-Página de lista de productos filtrados por subcategoría, con opciones de carga, filtrado y ordenación de productos, y manejo del carrito de compras.
-
-### ProductosDestacados Component
-
-Lista de productos destacados para exploración y compra, con una experiencia de usuario eficiente.
-
-### Skeleton Component
-
-Indicador visual de carga en la interfaz, simulando la carga de datos.
-
-### Subheader Component
-
-Componente de navegación que muestra categorías y subcategorías, cargando dinámicamente desde la API.
-
-### TPIsection Component
-
-Sección de productos relacionados que mejora la navegación en la página de detalles del producto.
-
-### CartContext Component
-
-Contexto que gestiona el estado del carrito de compras en toda la aplicación, calculando el total de costos.
-
-### MainLayout Component
-
-Estructura principal que envuelve los elementos comunes de la aplicación como el encabezado y pie de página.
-
-### ShoppingCart Component
-
-Página del carrito de compras donde el usuario puede revisar, modificar y eliminar productos, y proceder al pago.
-
-### Home Component
-
-Página de inicio de la aplicación que incluye imágenes promocionales, productos destacados y banners de ofertas.
+- **Banner**: Sección promocional con título, descripción, botón de llamada a la acción e imagen.
+- **Breadcrumb**: Componente de navegación que muestra la ruta actual dentro de la estructura del sitio.
+- **ErrorComponent**: Componente visual para manejar errores de carga de datos.
+- **Filter Component**: Componente de filtrado dinámico de productos según subcategoría.
+- **Footer Component**: Pie de página con información de la empresa, enlaces a redes sociales y métodos de pago.
+- **Header Component**: Encabezado con logotipo, barra de búsqueda y enlaces de navegación.
+- **PromoImage Component**: Renderiza imágenes promocionales basadas en un identificador.
+- **PDPdetalle Component**: Página de detalles de producto con opción para añadir al carrito.
+- **Pdpspecs Component**: Muestra especificaciones técnicas en formato colapsable.
+- **PLP Component**: Listado de productos con opciones de carga, filtrado y ordenación.
+- **ProductosDestacados Component**: Lista de productos destacados, optimizada para la navegación y compra.
+- **Skeleton Component**: Indicador visual de carga para mejorar la experiencia de usuario.
+- **Subheader Component**: Menú de navegación de categorías y subcategorías.
+- **TPIsection Component**: Productos relacionados en la página de detalles para facilitar la exploración.
+- **CartContext Component**: Contexto que gestiona el estado global del carrito de compras.
+- **MainLayout Component**: Layout principal que agrupa los elementos comunes de la aplicación.
+- **ShoppingCart Component**: Página del carrito con opciones de edición y resumen de costos.
+- **Home Component**: Página principal con productos destacados, banners e imágenes promocionales. que mejora la navegación en la página de detalles del producto.
 
 ## Rutas de la Aplicación
 
@@ -134,3 +65,24 @@ La estructura de rutas proporciona una navegación fluida en la aplicación:
    ```bash
    git clone https://github.com/tu-usuario/WEB-FE-PRJ2-API-WOBBEGONG.git
    cd WEB-FE-PRJ2-API-WOBBEGONG
+   
+2. Instalar dependencias
+
+   ```bash
+   npm install
+   
+3. Iniciar el servidor de desarrollo:
+
+   ```bash
+   npm run dev
+
+## Contribución
+
+Las contribuciones son bienvenidas y fomentadas para mejorar este proyecto. Para contribuir, sigue estos pasos:
+
+1. Haz un fork del proyecto.
+2. Crea una nueva rama para tu funcionalidad o corrección (`git checkout -b feature/nueva-funcionalidad`).
+3. Haz commit de tus cambios (`git commit -m 'Añadir nueva funcionalidad'`).
+4. Sube los cambios (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request en este repositorio.
+
