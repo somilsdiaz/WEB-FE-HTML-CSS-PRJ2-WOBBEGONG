@@ -37,7 +37,7 @@ _Below are screenshots of key sections of the application:_
 - **Home Page**
 ![Home Page](https://github.com/user-attachments/assets/0df3b083-6d05-4f66-91a2-edc4a60c27ce)
 
-
+- **Product Details Page**
 ![Product Details Page](https://github.com/user-attachments/assets/ccd2a8a4-1ffd-4a49-a131-582cd185f8f9)
 
 - **Shopping Cart**
