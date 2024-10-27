@@ -34,9 +34,16 @@ The frontend of this application connects to a **Mock API** implemented using **
 
 _Below are screenshots of key sections of the application:_
 
+- **Home Page**
 ![Home Page](https://github.com/user-attachments/assets/0df3b083-6d05-4f66-91a2-edc4a60c27ce)
+
+
 ![Product Details Page](https://github.com/user-attachments/assets/ccd2a8a4-1ffd-4a49-a131-582cd185f8f9)
+
+- **Shopping Cart**
 ![Shopping Cart](https://github.com/user-attachments/assets/485b0987-b631-42be-84a2-2b6eb13e342e)
+
+- **Product List**
 ![Product List](https://github.com/user-attachments/assets/40f8435f-155b-4dce-931e-db032a3d591a)
 
 ## API Description
